@@ -28,7 +28,7 @@
         temporary
       >
         <v-list>
-            <v-list-item v-for="component in components" :key="component.title" :to="component.link" 
+            <v-list-item v-for="component in components" :key="component.title" :to="`${component.link}/individual`" 
             :class="{'v-list-item--active': selectedItem === component.link}"
               @click="selectItem(component)">
           <v-list-item-content>
