@@ -7,11 +7,6 @@ export const useButtonStyleStore = defineStore('buttonStyle', {
     cbxRipple: false,
   }),
   actions: {
-    setBtnStyle(newStyle) {
-      this.btnStyle = newStyle;
-    },
-    setRipple(newvalue){
-      this.cbxRipple = newvalue;
-    }
+    console.log("test");
   }
 });
