@@ -1,7 +1,23 @@
-## Run Dev Server
-cd %filePath%\V1\Component-Playground
-npm run dev
+# How to use
+1) Navigate to different components using the navigation drawer on the top left. (Only Buttons page is currently active)
+2) Change to the individual or shared tab to work on personal or collaborative projects. (Shared page is currently in progress)
+3) Each component can be edited/ experimented with using the panel on the right hand side of the respective component by clicking on the respective property you would like to edit on the panel and changing it. 
 
+# Current Features
+1) Basic Styled button can be accessed and experimented with by navigating to Buttons using the navigation drawer on the top left and selecting the individual tab.
+
+# Things being worked on
+1) Search function to find different types of the same component. Example search for Styled or Action button (Action button to still be added).
+2) Shared functionality for collaboration
+3) Add More types of components
+
+# Known bugs/ issues
+1) Webpage sometimes appears blank until refreshed.
+2) The size panel opens and closes if the "Auto Width" or "Auto Height" checkbos is clicked.
+
+# Things to note after downloading project from gitHub
+After installing all the required setup Dependecies listed below, ensure that the "nuxt_modules" folder is in the main project directory.
+ 
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
@@ -26,7 +42,7 @@ bun install
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Start the development server on `http://localhost:3000`: by running one of the commands below
 
 ```bash
 # npm

@@ -8,7 +8,7 @@
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title >test</v-toolbar-title>
+        <v-toolbar-title >Vuetify Component Playground</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -47,7 +47,7 @@
               align-tabs="title"
             >
               <v-tab :to="`${selectedItem}/individual`">
-             indiv
+                Individual
               </v-tab>
               <v-tab :to="`${selectedItem}/shared`">
               Shared

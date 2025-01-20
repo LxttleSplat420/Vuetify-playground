@@ -1,69 +1,51 @@
 <script>
 import { th } from 'vuetify/locale';
+import { useButtonStyleStore } from '~/stores/buttonStyle';
 
 //import PromptSelection from '@/pages/Buttons/components/PromptSelection.vue';
 export default {
   data: () => ({
-    styled: {
-      name: 'Styled',
-      variant: 'outlined',
-      start: null,
-      end: null,
-      elevation: 2,
-      rounded: "0",
-      color: "black",
-      flat: false,
-      height: "36",
-      width: "100",
-      AutoWidth: false,
-      AutoHeight: false,
-      prevHeight: "36",
-      prevWidth: "100",
-    },
-    variants: ['text', 'flat', 'tonal', 'outlined', 'plain'],
-    rounding: ['0', 'xs', 'sm', 'true', 'lg', 'xl', 'pill', 'circle', 'shaped'],
-    prevStyledElevation: 0,
-    panelOpen: null,
+    panelOpen: null,    
     
   }),
   methods: {
     ResetWidth(){
-      this.styled.width = 100;
+      useButtonStyleStore().styled.width = 100;
     },
     ResetHeight(){
-      this.styled.height = 36;
+      useButtonStyleStore().styled.height = 36;
     },
     ChangeFlat(){
-      if (this.styled.flat) {
-        this.prevStyledElevation = this.styled.elevation;
-        this.styled.elevation = 0;
+      if (useButtonStyleStore().styled.flat) {
+        useButtonStyleStore().prevStyledElevation = useButtonStyleStore().styled.elevation;
+        useButtonStyleStore().styled.elevation = 0;
       }
       else {
-        this.styled.elevation = this.prevStyledElevation;
+        useButtonStyleStore().styled.elevation = useButtonStyleStore().prevStyledElevation;
       }
     },
     onClearStyled(){
-      this.styled.color = "black";
+      useButtonStyleStore().styled.color = "black";
     },
     styledAutoWidth(){
 
-      if (this.styled.AutoWidth){
-        this.styled.prevWidth = this.styled.width;
+      if (useButtonStyleStore().styled.AutoWidth){
+        useButtonStyleStore().styled.prevWidth = useButtonStyleStore().styled.width;
 
-        this.styled.width = "auto";
+        useButtonStyleStore().styled.width = "auto";
       } else 
       {
-        this.styled.width = this.styled.prevWidth;}
+        useButtonStyleStore().styled.width = useButtonStyleStore().styled.prevWidth;}
     },
     styledAutoHeight(){
 
-      if (this.styled.AutoHeight){
-        this.styled.prevHeight = this.styled.height;
+      if (useButtonStyleStore().styled.AutoHeight){
+        useButtonStyleStore().styled.prevHeight = useButtonStyleStore().styled.height;
 
-        this.styled.height = "auto";
+        useButtonStyleStore().styled.height = "auto";
       } else 
       {
-        this.styled.height = this.styled.prevHeight;}
+        useButtonStyleStore().styled.height = useButtonStyleStore().styled.prevHeight;}
     },
   },
 }
@@ -83,14 +65,14 @@ definePageMeta({
         <v-btn 
         ref="btnStyled"
         :variant="useButtonStyleStore().styled.variant" 
-        :elevation="styled.elevation"
-        :rounded="styled.rounded"
-        :color="styled.color"
-        :flat="styled.flat"
-        :height="styled.height"
-        :width="styled.width"        
+        :elevation="useButtonStyleStore().styled.elevation"
+        :rounded="useButtonStyleStore().styled.rounded"
+        :color="useButtonStyleStore().styled.color"
+        :flat="useButtonStyleStore().styled.flat"
+        :height="useButtonStyleStore().styled.height"
+        :width="useButtonStyleStore().styled.width"        
         >
-          {{ styled.name }}
+          {{ useButtonStyleStore().styled.name }}
         </v-btn>
       </v-col>
     
@@ -110,7 +92,7 @@ definePageMeta({
                   Enter a button caption
                 </span>
                 <span v-else key="1">
-                  {{ styled.name }}
+                  {{ useButtonStyleStore().styled.name }}
                 </span>
               </v-fade-transition>
             </v-col>
@@ -118,7 +100,7 @@ definePageMeta({
         </template>
       </v-expansion-panel-title>
       <v-expansion-panel-text>
-        <v-text-field v-model="styled.name" hide-details clearable></v-text-field>
+        <v-text-field v-model="useButtonStyleStore().styled.name" hide-details clearable></v-text-field>
       </v-expansion-panel-text>
     </v-expansion-panel>
 
@@ -135,7 +117,7 @@ definePageMeta({
                 Select Variant Type
               </span>
               <span v-else key="1">
-                {{ styled.variant }}
+                {{ useButtonStyleStore().styled.variant }}
               </span>
             </v-fade-transition>
           </v-col>
@@ -144,7 +126,7 @@ definePageMeta({
       <v-expansion-panel-text>
         <v-row no-gutters>
           <v-col>
-            <v-select v-model="styled.variant" :items="variants" variant="elevated" chips flat></v-select>
+            <v-select v-model="useButtonStyleStore().styled.variant" :items="useButtonStyleStore().variants" variant="elevated" chips flat></v-select>
           </v-col>
         </v-row>
 
@@ -152,7 +134,7 @@ definePageMeta({
     </v-expansion-panel>
 
     <!-- Elevation -->
-    <v-expansion-panel :disabled="styled.flat">
+    <v-expansion-panel :disabled="useButtonStyleStore().styled.flat">
       <v-expansion-panel-title>
         <template v-slot:default="{ expanded }">
           <v-row no-gutters>
@@ -165,7 +147,7 @@ definePageMeta({
                   Set elevated amount (default = 2)
                 </span>
                 <span v-else key="1">
-                  {{ styled.elevation }}
+                  {{ useButtonStyleStore().styled.elevation }}
                 </span>
               </v-fade-transition>
             </v-col>
@@ -182,7 +164,7 @@ definePageMeta({
             <v-row>
               <v-col>
                 <v-text-field
-                  v-model="styled.elevation"
+                  v-model="useButtonStyleStore().styled.elevation"
                   label="Elevation Amount"
                   type="number"
                   :min="0"
@@ -218,7 +200,7 @@ definePageMeta({
                   Set rounded amount (default = 0)
                 </span>
                 <span v-else key="1">
-                  {{ styled.rounded }}
+                  {{ useButtonStyleStore().styled.rounded }}
                 </span>
               </v-fade-transition>
             </v-col>
@@ -234,7 +216,7 @@ definePageMeta({
           <v-container>
             <v-row>
               <v-col>
-                <v-select v-model="styled.rounded" :items="rounding" variant="elevated" chips flat></v-select>
+                <v-select v-model="useButtonStyleStore().styled.rounded" :items="rounding" variant="elevated" chips flat></v-select>
               </v-col>
             </v-row>
           </v-container>
@@ -261,7 +243,7 @@ definePageMeta({
                   Enter a color
                 </span>
                 <span v-else key="1">
-                  {{ styled.color }}
+                  {{ useButtonStyleStore().styled.color }}
                 </span>
               </v-fade-transition>
             </v-col>
@@ -269,7 +251,7 @@ definePageMeta({
         </template>
       </v-expansion-panel-title>
       <v-expansion-panel-text>
-        <v-text-field v-model="styled.color" placeholder="black" hide-details clearable @click:clear="onClearStyled"></v-text-field>
+        <v-text-field v-model="useButtonStyleStore().styled.color" placeholder="black" hide-details clearable @click:clear="onClearStyled"></v-text-field>
       </v-expansion-panel-text>
     </v-expansion-panel>
 
@@ -287,7 +269,7 @@ definePageMeta({
                   Enable/ Disable
                 </span>
                 <span v-else key="1">
-                  {{ styled.flat }}
+                  {{ useButtonStyleStore().styled.flat }}
                 </span>
               </v-fade-transition>
             </v-col>
@@ -296,7 +278,7 @@ definePageMeta({
       </v-expansion-panel-title>
       <v-expansion-panel-text>
         <v-checkbox
-        v-model="styled.flat"
+        v-model="useButtonStyleStore().styled.flat"
         @change="ChangeFlat"
         ></v-checkbox>
       </v-expansion-panel-text>
@@ -309,11 +291,11 @@ definePageMeta({
           <v-row no-gutters>
             <v-col>
               <v-checkbox label="Auto Width"
-              v-model="styled.AutoWidth"
+              v-model="useButtonStyleStore().styled.AutoWidth"
               @change="styledAutoWidth">                                            
             </v-checkbox>
             <v-checkbox label="Auto Height"
-              v-model="styled.AutoHeight"
+              v-model="useButtonStyleStore().styled.AutoHeight"
               @change="styledAutoHeight">                                            
             </v-checkbox>
             </v-col>
@@ -323,7 +305,7 @@ definePageMeta({
                   Default Width = 100, Height = 36
                 </span>
                 <span v-else key="1">
-                  Width: {{ styled.width }}, Height: {{ styled.height }}
+                  Width: {{ useButtonStyleStore().styled.width }}, Height: {{ useButtonStyleStore().styled.height }}
                 </span>
               </v-fade-transition>
             </v-col>
@@ -338,8 +320,8 @@ definePageMeta({
             <v-row>              
               <v-col>
                 <v-text-field
-                  :disabled="styled.AutoWidth"
-                  v-model="styled.width"
+                  :disabled="useButtonStyleStore().styled.AutoWidth"
+                  v-model="useButtonStyleStore().styled.width"
                   label="Width"
                   type="number"
                   :min="0"
@@ -349,7 +331,7 @@ definePageMeta({
                 ></v-text-field>
               </v-col>
               <v-col>
-                <v-btn :disabled="styled.AutoWidth" @click="ResetWidth" >Reset Width</v-btn>
+                <v-btn :disabled="useButtonStyleStore().styled.AutoWidth" @click="ResetWidth" >Reset Width</v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -358,8 +340,8 @@ definePageMeta({
             <v-row>
               <v-col>
                 <v-text-field
-                  :disabled="styled.AutoHeight"
-                  v-model="styled.height"
+                  :disabled="useButtonStyleStore().styled.AutoHeight"
+                  v-model="useButtonStyleStore().styled.height"
                   label="Height"
                   type="number"
                   :min="0"
@@ -369,7 +351,7 @@ definePageMeta({
                 ></v-text-field>
               </v-col>
               <v-col>
-                <v-btn :disabled="styled.AutoHeight" @click="ResetHeight" >Reset Height</v-btn>
+                <v-btn :disabled="useButtonStyleStore().styled.AutoHeight" @click="ResetHeight" >Reset Height</v-btn>
               </v-col>
             </v-row>
           </v-container>
