@@ -25,4 +25,40 @@ export const useButtonStyleStore = defineStore('buttonStyle', {
     panelOpen: null,
     
   }),
+  actions: {
+    ResetWidth() {
+      this.styled.width = "100"
+    },
+    ResetHeight (){
+      this.styled.height = "36"
+    },
+    ChangeFlat(){
+      if (this.styled.flat) {
+        this.prevStyledElevation = this.styled.elevation
+        this.styled.elevation = 0
+      } else {
+        this.styled.elevation = this.prevStyledElevation
+      }
+    },
+    onClearStyled(){
+      this.styled.color = 'black'
+    },
+    styledAutoWidth(){
+      if (this.styled.AutoWidth) {
+        this.styled.prevWidth = this.styled.width
+        this.styled.width = 'auto'
+      } else {
+        this.styled.width = this.styled.prevWidth
+      }
+    },
+    styledAutoHeight(){
+      if (this.styled.AutoHeight) {
+        this.styled.prevHeight = this.styled.height
+        this.styled.height = 'auto'
+      } else {
+        this.styled.height = this.styled.prevHeight
+      }
+    },
+
+  }
 });
