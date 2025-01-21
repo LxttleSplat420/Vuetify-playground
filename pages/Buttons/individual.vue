@@ -1,69 +1,61 @@
-<script>
-import { th } from 'vuetify/locale';
-import { useButtonStyleStore } from '~/stores/buttonStyle';
+<script setup>
+import { useButtonStyleStore } from '~/stores/buttonStyle'
+import { useButtonActivityStore } from '~/stores/buttonActivity'
 
-//import PromptSelection from '@/pages/Buttons/components/PromptSelection.vue';
-export default {
-  data: () => ({
-    panelOpen: null,    
-    
-  }),
-  methods: {
-    ResetWidth(){
-      useButtonStyleStore().styled.width = 100;
-    },
-    ResetHeight(){
-      useButtonStyleStore().styled.height = 36;
-    },
-    ChangeFlat(){
-      if (useButtonStyleStore().styled.flat) {
-        useButtonStyleStore().prevStyledElevation = useButtonStyleStore().styled.elevation;
-        useButtonStyleStore().styled.elevation = 0;
-      }
-      else {
-        useButtonStyleStore().styled.elevation = useButtonStyleStore().prevStyledElevation;
-      }
-    },
-    onClearStyled(){
-      useButtonStyleStore().styled.color = "black";
-    },
-    styledAutoWidth(){
+const buttonStyleStore = useButtonStyleStore()
 
-      if (useButtonStyleStore().styled.AutoWidth){
-        useButtonStyleStore().styled.prevWidth = useButtonStyleStore().styled.width;
-
-        useButtonStyleStore().styled.width = "auto";
-      } else 
-      {
-        useButtonStyleStore().styled.width = useButtonStyleStore().styled.prevWidth;}
-    },
-    styledAutoHeight(){
-
-      if (useButtonStyleStore().styled.AutoHeight){
-        useButtonStyleStore().styled.prevHeight = useButtonStyleStore().styled.height;
-
-        useButtonStyleStore().styled.height = "auto";
-      } else 
-      {
-        useButtonStyleStore().styled.height = useButtonStyleStore().styled.prevHeight;}
-    },
-  },
+const ResetWidth = () => {
+  buttonStyleStore.styled.width = 100
 }
 
+const ResetHeight = () => {
+  buttonStyleStore.styled.height = 36
+}
+
+const ChangeFlat = () => {
+  if (buttonStyleStore.styled.flat) {
+    buttonStyleStore.prevStyledElevation = buttonStyleStore.styled.elevation
+    buttonStyleStore.styled.elevation = 0
+  } else {
+    buttonStyleStore.styled.elevation = buttonStyleStore.prevStyledElevation
+  }
+}
+
+const onClearStyled = () => {
+  buttonStyleStore.styled.color = 'black'
+}
+
+const styledAutoWidth = () => {
+  if (buttonStyleStore.styled.AutoWidth) {
+    buttonStyleStore.styled.prevWidth = buttonStyleStore.styled.width
+    buttonStyleStore.styled.width = 'auto'
+  } else {
+    buttonStyleStore.styled.width = buttonStyleStore.styled.prevWidth
+  }
+}
+
+const styledAutoHeight = () => {
+  if (buttonStyleStore.styled.AutoHeight) {
+    buttonStyleStore.styled.prevHeight = buttonStyleStore.styled.height
+    buttonStyleStore.styled.height = 'auto'
+  } else {
+    buttonStyleStore.styled.height = buttonStyleStore.styled.prevHeight
+  }
+}
 
 definePageMeta({
-  layout: 'navigationbar'
+  layout: 'navigationbar',
 })
-
 </script>
+
 
 <template>
   <!-- Styled Button Code -->
+   <v-card>
   <v-container fluid fill-height>
     <v-row align="center">
       <v-col align="center">
         <v-btn 
-        ref="btnStyled"
         :variant="useButtonStyleStore().styled.variant" 
         :elevation="useButtonStyleStore().styled.elevation"
         :rounded="useButtonStyleStore().styled.rounded"
@@ -77,7 +69,8 @@ definePageMeta({
       </v-col>
     
     <v-col cols="auto">
-      <v-expansion-panels v-model="panelOpen" style="max-width: 400px;" position-absolute = "right-0">
+      <v-expansion-panels v-model="useButtonStyleStore().panelOpen" style="max-width: 400px;" position-absolute = "right-0">
+
     <!-- Caption -->
     <v-expansion-panel>
       <v-expansion-panel-title>
@@ -216,7 +209,7 @@ definePageMeta({
           <v-container>
             <v-row>
               <v-col>
-                <v-select v-model="useButtonStyleStore().styled.rounded" :items="rounding" variant="elevated" chips flat></v-select>
+                <v-select v-model="useButtonStyleStore().styled.rounded" :items="useButtonStyleStore().rounding" variant="elevated" chips flat></v-select>
               </v-col>
             </v-row>
           </v-container>
@@ -369,7 +362,10 @@ definePageMeta({
     </v-col>
   </v-row>
 </v-container>
-  
+</v-card>
+
+ <!-- Activity Button Code -->
+ 
 
 </template>
 

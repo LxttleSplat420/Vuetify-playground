@@ -22,6 +22,7 @@ export const useButtonStyleStore = defineStore('buttonStyle', {
     variants: ['text', 'flat', 'tonal', 'outlined', 'plain'],
     rounding: ['0', 'xs', 'sm', 'true', 'lg', 'xl', 'pill', 'circle', 'shaped'],
     prevStyledElevation: 0,
+    panelOpen: null,
     
   }),
 });

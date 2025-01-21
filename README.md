@@ -12,8 +12,8 @@
 3) Add More types of components
 
 # Known bugs/ issues
-1) Webpage sometimes appears blank until refreshed.
-2) The size panel opens and closes if the "Auto Width" or "Auto Height" checkbos is clicked.
+1) Webpage sometimes appears blank until refreshed. (Might have been caused by previous Hydration Errors, which should be now fixed:)
+2) The size panel opens and closes if the "Auto Width" or "Auto Height" checkboxes are clicked.
 
 # Things to note after downloading project from gitHub
 After installing all the required setup Dependecies listed below, ensure that the "nuxt_modules" folder is in the main project directory.

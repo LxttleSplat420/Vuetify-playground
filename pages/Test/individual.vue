@@ -1,14 +1,14 @@
 <template>
     <div>
-
+        Testing Stuff...
     </div>
 </template>
 
 <script setup>
 
-definePageMeta({
-    layout: 'navigationbar',
-})
+ definePageMeta({
+     layout: 'navigationbar',
+ })
 
 </script>
 
