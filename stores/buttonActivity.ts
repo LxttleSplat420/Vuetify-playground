@@ -21,10 +21,13 @@ export const useButtonActivityStore = defineStore('buttonActivity', {
     enableLoading(){
       if (this.isLoading){
       this.loading = this.prevLoading;
+      this.prevRipple = this.ripple;
+      this.ripple = "false";
       } else
       {
-        this.prevLoading = this.loading;
+        this.prevLoading = this.loading;        
         this.loading = "false";
+        this.ripple = this.prevRipple;
       }
     },
     enableRipple(){
@@ -33,7 +36,7 @@ export const useButtonActivityStore = defineStore('buttonActivity', {
       } else
       {
         this.prevRipple = this.ripple;
-        this.ripple = "true";
+        this.ripple = "false";
       }
     },
     clearRippleColor(){

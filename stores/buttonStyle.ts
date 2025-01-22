@@ -4,8 +4,8 @@ import { defineStore } from 'pinia';
 export const useButtonStyleStore = defineStore('buttonStyle', {
   state: () => ({
     styled: {
-      name: 'Styled',
-      variant: 'outlined',
+      name: "Styled",
+      variant: "outlined",
       start: null,
       end: null,
       elevation: 2,
@@ -41,12 +41,12 @@ export const useButtonStyleStore = defineStore('buttonStyle', {
       }
     },
     onClearStyled(){
-      this.styled.color = 'black'
+      this.styled.color = "black"
     },
     styledAutoWidth(){
       if (this.styled.AutoWidth) {
         this.styled.prevWidth = this.styled.width
-        this.styled.width = 'auto'
+        this.styled.width = "auto"
       } else {
         this.styled.width = this.styled.prevWidth
       }
@@ -54,7 +54,7 @@ export const useButtonStyleStore = defineStore('buttonStyle', {
     styledAutoHeight(){
       if (this.styled.AutoHeight) {
         this.styled.prevHeight = this.styled.height
-        this.styled.height = 'auto'
+        this.styled.height = "auto"
       } else {
         this.styled.height = this.styled.prevHeight
       }

@@ -308,7 +308,7 @@ definePageMeta({
         <v-col align="center">
           <v-btn :active="useButtonActivityStore().active" :disabled="useButtonActivityStore().disabled"
             :loading="useButtonActivityStore().loading !== 'false' ? useButtonActivityStore().loading : false"
-            :ripple="{ class: 'text-' + useButtonActivityStore().ripple }"
+            :ripple="useButtonActivityStore().ripple === 'false' ? false : { class: 'text-' + useButtonActivityStore().ripple }"
             
             >
             Action Button
@@ -407,7 +407,7 @@ definePageMeta({
             </v-expansion-panel>
 
             <!-- Ripple -->
-            <v-expansion-panel>
+            <v-expansion-panel :disabled="useButtonActivityStore().isLoading">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
@@ -433,8 +433,8 @@ definePageMeta({
                     @change="useButtonActivityStore().enableRipple()"></v-checkbox>
                 </v-col>
                 <v-col>
-                  <v-text-field v-model="useButtonActivityStore().ripple"
-                    :disabled="!useButtonActivityStore().isRipple" placeholder="true" hide-details clearable
+                  <v-text-field v-model="useButtonActivityStore().ripple" :disabled="!useButtonActivityStore().isRipple"
+                    placeholder="true" hide-details clearable
                     @click:clear="useButtonActivityStore().clearRippleColor()"></v-text-field>
                 </v-col>
 
@@ -447,8 +447,8 @@ definePageMeta({
       </v-row>
     </v-container>
   </v-card>
-  
-  
+
+
 
 
 

@@ -1,13 +1,13 @@
 # How to use
 1) Navigate to different components using the navigation drawer on the top left. (Only Buttons page is currently active)
 2) Change to the individual or shared tab to work on personal or collaborative projects. (Shared page is currently in progress)
-3) Each component can be edited/ experimented with using the panel on the right hand side of the respective component by clicking on the respective property you would like to edit on the panel and changing it. 
+3) Each component can be edited/ experimented with using the panel on the right hand side of the respective component by clicking on the respective property/ properties you would like to edit on the panel and changing it. 
 
 # Current Features
-1) Basic Styled button can be accessed and experimented with by navigating to Buttons using the navigation drawer on the top left and selecting the individual tab.
+1) Styled and Activity buttons can be accessed and experimented with by navigating to Buttons using the navigation drawer on the top left and selecting the individual tab.
 
 # Things being worked on
-1) Search function to find different types of the same component. Example search for Styled or Action button (Action button to still be added).
+1) Search function to find different types of the same component. Example search for Styled or Action button (Action button now available :)
 2) Shared functionality for collaboration
 3) Add More types of components
 
