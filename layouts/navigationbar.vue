@@ -5,7 +5,35 @@
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Vuetify Component Playground</v-toolbar-title>
         <v-spacer></v-spacer>
+        
+        <client-only>
+          <template v-if="$vuetify.display.mdAndUp">
 
+            <!-- Search Field -->
+            <v-text-field
+              v-if="isSearchVisible"
+              v-model="useComponentSearchStore().searchQuery"
+              label="Search Types"
+              outlined
+              clearable
+              @blur="isSearchVisible = false" 
+              @click:clear="searchClear()"
+              class="mt-7"
+              ref="searchField"
+            ></v-text-field>
+
+            <v-btn icon="mdi-magnify" variant="text"
+            @click="toggleSearch"
+            ></v-btn>
+            
+
+            <v-btn icon="mdi-filter" variant="text"></v-btn>
+          </template>
+        </client-only>
+
+        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+
+        <!-- Dark/ Light Mode Switch -->
         <v-switch
 					class="pt-5 pr-3 "
 					v-model="isLightTheme"
@@ -13,16 +41,7 @@
 					true-icon='mdi-weather-sunny'
 					false-icon='mdi-weather-night'
 					inset
-			/>
-
-        <client-only>
-          <template v-if="$vuetify.display.mdAndUp">
-            <v-btn icon="mdi-magnify" variant="text"></v-btn>
-            <v-btn icon="mdi-filter" variant="text"></v-btn>
-          </template>
-        </client-only>
-
-        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+			  />
       </v-app-bar>
 
       <client-only>
@@ -73,6 +92,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
+
+import { useComponentSearchStore } from '~/stores/componentSearch';
+
 const drawer = ref(false);
 const selectedItem = ref("/buttons");
 const tab = ref("individual");
@@ -80,6 +102,8 @@ const tab = ref("individual");
 const theme = useTheme();
 
 const isLightTheme = ref(theme.global.name.value === 'light');
+const isSearchVisible = ref(false); // Toggles the search field visibility
+const searchField = ref(null);
 
 watch(isLightTheme, (newValue: boolean) => {
 
@@ -96,6 +120,19 @@ const components = [
 
 function selectItem(component: any) {
   selectedItem.value = component.link;
-}
+};
+
+// Toggle search field visibility
+const toggleSearch = () => {
+  isSearchVisible.value = !isSearchVisible.value;
+
+  nextTick(() => {
+          searchField.value.focus(); // Focus the search input when visible
+      });
+};
+
+const searchClear = () => {
+  useComponentSearchStore().searchQuery = '';
+};
 
 </script>

@@ -2,21 +2,22 @@
 1) Navigate to different components using the navigation drawer on the top left. (Only Buttons page is currently active)
 2) Change to the individual or shared tab to work on personal or collaborative projects. (Shared page is currently in progress)
 3) Each component can be edited/ experimented with using the panel on the right hand side of the respective component by clicking on the respective property/ properties you would like to edit on the panel and changing it. 
+4) Components can now be searched using the maginfying icon at the top.
 
 # Current Features
 1) Styled and Activity buttons can be accessed and experimented with by navigating to Buttons using the navigation drawer on the top left and selecting the individual tab.
 
 # Things being worked on
-1) Search function to find different types of the same component. Example search for Styled or Action button (Action button now available :)
+1) Adding More types of components
 2) Shared functionality for collaboration
-3) Add More types of components
 
 # Known bugs/ issues
 1) Webpage sometimes appears blank until refreshed. (Might have been caused by previous Hydration Errors, which should be now fixed:)
 2) The size panel opens and closes if the "Auto Width" or "Auto Height" checkboxes are clicked.
+3) Warnings occur when parseing "auto" to either the width or height properties of the Styled Button, but does not appear to break any functionality.
 
 # Things to note after downloading project from gitHub
-After installing all the required setup Dependecies listed below, ensure that the "nuxt_modules" folder is in the main project directory.
+After installing all the required setup Dependencies listed below, ensure that the "nuxt_modules" folder is in the main project directory.
  
 # Nuxt Minimal Starter
 
