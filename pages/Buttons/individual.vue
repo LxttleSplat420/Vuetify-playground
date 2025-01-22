@@ -484,16 +484,24 @@ const matchesSearch = (card) => {
     <v-container fluid fill-height>
       <v-row align="center">
         <v-col align="center">
-          <v-tooltip text="Tooltip"
-              :open-on-click="useButtonInteractiveStore().onClick"
-              :open-on-hover="useButtonInteractiveStore().onHover"
-              :open-on-focus="useButtonInteractiveStore().onFocus"
-              :location="useButtonInteractiveStore().location"
-          >
+          <v-tooltip text="Tooltip" :open-on-click="useButtonInteractiveStore().onClick"
+            :open-on-hover="useButtonInteractiveStore().onHover" :open-on-focus="useButtonInteractiveStore().onFocus"
+            :location="useButtonInteractiveStore().location">
             <template v-slot:activator="{ props }">
-              <v-btn v-bind="props">{{ cards[2].title }} Button</v-btn>
+              <v-btn v-bind="props"
+              @click=" useButtonInteractiveStore().snackbarEnabled === true ? useButtonInteractiveStore().snackbar = !useButtonInteractiveStore().snackbar : null"
+              >{{ cards[2].title }} Button</v-btn>
             </template>
           </v-tooltip>
+
+          <!-- Snackbar -->
+          <v-snackbar v-model="useButtonInteractiveStore().snackbar" location="center">
+            {{ useButtonInteractiveStore().snackbarText }}
+            <template v-slot:actions>
+              <v-btn @click="useButtonInteractiveStore().onClicked()">Close</v-btn>
+            </template>
+          </v-snackbar>
+
         </v-col>
 
         <v-col cols="auto">
@@ -501,7 +509,7 @@ const matchesSearch = (card) => {
             position-absolute="right-0">
 
             <!-- Show -->
-             <v-expansion-panel style="width: 400px;">
+            <v-expansion-panel style="width: 400px;">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
@@ -531,8 +539,7 @@ const matchesSearch = (card) => {
                           <v-col>
                             <v-select v-model="useButtonInteractiveStore().showType"
                               :items="useButtonInteractiveStore().showTypes" chips flat
-                              @update:menu="useButtonInteractiveStore().updateShowType"
-                              ></v-select>
+                              @update:menu="useButtonInteractiveStore().updateShowType"></v-select>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -574,8 +581,7 @@ const matchesSearch = (card) => {
                         <v-row>
                           <v-col>
                             <v-select v-model="useButtonInteractiveStore().location"
-                              :items="useButtonInteractiveStore().locations" chips flat
-                              ></v-select>
+                              :items="useButtonInteractiveStore().locations" chips flat></v-select>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -585,6 +591,40 @@ const matchesSearch = (card) => {
                 </v-row>
               </v-expansion-panel-text>
 
+            </v-expansion-panel>
+
+            <!-- Snackbar/ PopUp -->
+            <v-expansion-panel>
+              <v-expansion-panel-title>
+                <template v-slot:default="{ expanded }">
+                  <v-row no-gutters>
+                    <v-col class="d-flex justify-start" cols="4">
+                      Snackbar/ PopUp
+                    </v-col>
+                    <v-col class="text-grey" cols="8">
+                      <v-fade-transition leave-absolute>
+                        <span v-if="expanded" key="0">
+                          Enable/ Disable and set text
+                        </span>
+                        <span v-else key="1">
+                          {{ useButtonInteractiveStore().snackbarEnabled }}
+                        </span>
+                      </v-fade-transition>
+                    </v-col>
+                  </v-row>
+                </template>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-col>
+                  <v-checkbox v-model="useButtonInteractiveStore().snackbarEnabled"></v-checkbox>
+                </v-col>
+                <v-col>
+                  <v-text-field v-model="useButtonInteractiveStore().snackbarText"
+                    :disabled="!useButtonInteractiveStore().snackbarEnabled" hide-details clearable
+                    @click:clear="useButtonInteractiveStore().clearSnackbarText()"></v-text-field>
+                </v-col>
+
+              </v-expansion-panel-text>
             </v-expansion-panel>
 
           </v-expansion-panels>

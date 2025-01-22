@@ -2,21 +2,24 @@ import { defineStore } from 'pinia'
 
 export const useButtonInteractiveStore = defineStore({
   id: 'myButtonInteractiveStore',
-  state: () => ({ 
+  state: () => ({
     panelOpen: null,
     showType: 'open-on-hover',
     onClick: false,
-    onFocus: false,    
+    onFocus: false,
     onHover: true,
     location: 'end',
+    snackbarEnabled: false,
+    snackbar: false,
+    snackbarText: "Snackbar text",
 
 
-    showTypes: ['open-on-click','open-on-focus', 'open-on-hover'],
+    showTypes: ['open-on-click', 'open-on-focus', 'open-on-hover'],
     locations: ['start', 'end', 'top', 'bottom'],
   }),
   actions: {
 
-    updateShowType(){
+    updateShowType() {
       if (this.showType === "open-on-click") {
         this.onClick = true
         this.onFocus = false
@@ -30,7 +33,13 @@ export const useButtonInteractiveStore = defineStore({
         this.onFocus = false
         this.onHover = true
       }
-    }
+    },
+    clearSnackbarText() {
+      this.snackbarText = ""
+    },
+    onClicked(){      
+      this.snackbar = false;      
+    },
 
   }
 })
