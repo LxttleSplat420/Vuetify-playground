@@ -1,14 +1,15 @@
 <template>
     <div>
-        <h1>Coming Soon!!!</h1>
+        Testing Stuff...
     </div>
 </template>
 
 <script setup>
 
-definePageMeta({
-    layout: 'navigationbar',
-})
+ definePageMeta({
+     layout: 'navigationbar',
+ })
+
 </script>
 
 <style lang="scss" scoped>

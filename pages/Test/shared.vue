@@ -9,6 +9,7 @@
 definePageMeta({
     layout: 'navigationbar',
 })
+
 </script>
 
 <style lang="scss" scoped>
