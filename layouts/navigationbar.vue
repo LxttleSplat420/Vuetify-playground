@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-layout>
-      <v-app-bar color="primary" prominent>
+      <v-app-bar color="indigo" prominent>
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Vuetify Component Playground</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -49,6 +49,7 @@
           v-model="drawer"
           :location="$vuetify.display.mobile ? 'bottom' : undefined"
           temporary
+          color="#ebebf3"
         >
           <v-list>
             <v-list-item
@@ -68,7 +69,7 @@
 
       <v-main>
         <v-card>
-          <v-tabs v-model="tab" bg-color="primary" align-tabs="title">
+          <v-tabs v-model="tab" bg-color="indigo" align-tabs="title">
             <v-tab :to="`${selectedItem}/individual`">Individual</v-tab>
             <v-tab :to="`${selectedItem}/shared`">Shared</v-tab>
           </v-tabs>
