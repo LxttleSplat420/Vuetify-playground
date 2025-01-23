@@ -2,10 +2,11 @@
 1) Navigate to different components using the navigation drawer on the top left. (Only Buttons page is currently active)
 2) Change to the individual or shared tab to work on personal or collaborative projects. (Shared page is currently in progress)
 3) Each component can be edited/ experimented with using the panel on the right hand side of the respective component by clicking on the respective property/ properties you would like to edit on the panel and changing it. 
-4) Components can now be searched using the maginfying icon at the top.
+4) Components can now be searched using the magnifying icon at the top.
 
 # Current Features
-1) Styled and Activity buttons can be accessed and experimented with by navigating to Buttons using the navigation drawer on the top left and selecting the individual tab.
+1) Styled, Activity and Interactive buttons can be accessed and experimented with by navigating to Buttons using the navigation drawer on the top left and selecting the individual tab.
+2) Different Types of the same component can be searched.
 
 # Things being worked on
 1) Adding More types of components
