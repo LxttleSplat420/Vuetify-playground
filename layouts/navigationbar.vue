@@ -104,7 +104,8 @@ const theme = useTheme();
 
 const isLightTheme = ref(theme.global.name.value === 'light');
 const isSearchVisible = ref(false); // Toggles the search field visibility
-const searchField = ref(null);
+
+const searchField = ref<HTMLInputElement | null>(null);
 
 watch(isLightTheme, (newValue: boolean) => {
 
@@ -128,7 +129,10 @@ const toggleSearch = () => {
   isSearchVisible.value = !isSearchVisible.value;
 
   nextTick(() => {
+          if (searchField.value !== null)
+          {
           searchField.value.focus(); // Focus the search input when visible
+          }
       });
 };
 
