@@ -1,10 +1,14 @@
 <script setup>
+import HomeAppBar from '~/components/HomePage/HomeAppBar.vue'
+
  definePageMeta({
    layout: 'navigationbar',
  })
 </script>
 
 <template>
+<HomeAppBar/>
+
 <div>
     <h1>
         Welcome to the Vuetify Virtual Playground. 

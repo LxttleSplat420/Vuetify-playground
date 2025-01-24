@@ -1,52 +1,9 @@
 <template>
   <v-card>
-    <v-layout>
-      <v-app-bar color="indigo" prominent>
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>Vuetify Component Playground</v-toolbar-title>
-        <v-spacer></v-spacer>
-        
-        <client-only>
-          <template v-if="$vuetify.display.mdAndUp">
-
-            <!-- Search Field -->
-            <v-text-field
-              v-if="isSearchVisible"
-              v-model="useComponentSearchStore().searchQuery"
-              label="Search Types"
-              outlined
-              clearable
-              @blur="isSearchVisible = false" 
-              @click:clear="searchClear()"
-              class="mt-7"
-              ref="searchField"
-            ></v-text-field>
-
-            <v-btn icon="mdi-magnify" variant="text"
-            @click="toggleSearch"
-            ></v-btn>
-            
-
-            <v-btn icon="mdi-filter" variant="text"></v-btn>
-          </template>
-        </client-only>
-
-        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
-
-        <!-- Dark/ Light Mode Switch -->
-        <v-switch
-					class="pt-5 pr-3 "
-					v-model="isLightTheme"
-					color='primary'
-					true-icon='mdi-weather-sunny'
-					false-icon='mdi-weather-night'
-					inset
-			  />
-      </v-app-bar>
-
+    <v-layout>      
       <client-only>
         <v-navigation-drawer
-          v-model="drawer"
+          v-model="useMyNavigationDrawerStore().drawer"
           :location="$vuetify.display.mobile ? 'bottom' : undefined"
           temporary
           color="#ebebf3"
@@ -91,53 +48,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
+import {useMyNavigationDrawerStore} from '@/stores/layouts/navigationDrawer'
 
-import { useComponentSearchStore } from '~/stores/componentSearch';
-
-const drawer = ref(false);
 const selectedItem = ref("/buttons");
 const tab = ref("individual");
 
-const theme = useTheme();
-
-const isLightTheme = ref(theme.global.name.value === 'light');
-const isSearchVisible = ref(false); // Toggles the search field visibility
-
-const searchField = ref<HTMLInputElement | null>(null);
-
-watch(isLightTheme, (newValue: boolean) => {
-
-	const themeName = newValue ? 'light' : 'dark';
-
-	theme.global.name.value = themeName;
-});
-
-
 const components = [
-  { title: 'Buttons', link: '/buttons' },
-  { title: 'Test', link: '/test' },
+  { title: 'Buttons', link: '/buttons' },  
+  { title: 'Selects', link: '/selects' },
+  { title: 'Testing', link: '/test' },
 ];
 
 function selectItem(component: any) {
   selectedItem.value = component.link;
 };
 
-// Toggle search field visibility
-const toggleSearch = () => {
-  isSearchVisible.value = !isSearchVisible.value;
-
-  nextTick(() => {
-          if (searchField.value !== null)
-          {
-          searchField.value.focus(); // Focus the search input when visible
-          }
-      });
-};
-
-const searchClear = () => {
-  useComponentSearchStore().searchQuery = '';
-};
 
 </script>

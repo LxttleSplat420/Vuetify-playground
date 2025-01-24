@@ -153,11 +153,11 @@
 </template>
 
 <script setup>
-import { useButtonActivityStore } from '~/stores/buttonActivity'
+import { useButtonActivityStore } from '~/stores/Buttons/buttonActivity'
 
 //Search Button Logic
 import { useSearchButtons } from '~/components/Buttons/SearchButtons.ts'; 
-const {cards, searchQuery, matchesSearch} = useSearchButtons();
+const {cards, matchesSearch} = useSearchButtons();
 
 </script>
 

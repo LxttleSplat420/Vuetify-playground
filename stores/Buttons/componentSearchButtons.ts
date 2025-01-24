@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
-export const useComponentSearchStore = defineStore({
-  id: 'myComponentSearchStore',
+export const useComponentSearchButtonsStore = defineStore({
+  id: 'myComponentSearchButtonsStore',
   state: () => ({ 
     searchQuery: "",
 

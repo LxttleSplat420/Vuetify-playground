@@ -1,7 +1,7 @@
-import { useComponentSearchStore } from '~/stores/componentSearch';
+import { useComponentSearchButtonsStore } from '~/stores/Buttons/componentSearchButtons';
 
 // Search Query
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 export function useSearchButtons() {
 
@@ -13,12 +13,10 @@ const cards = ref([
   // Add more cards as needed
 ]);
 
-const searchQuery = ref(""); // Reactive search input
-
 // Computed property for filtered cards
 const matchesSearch = (card: any) => {
-  return card.title.toLowerCase().includes(useComponentSearchStore().searchQuery.toLowerCase());
+  return card.title.toLowerCase().includes(useComponentSearchButtonsStore().searchQuery.toLowerCase());
 };
 
-return {cards, searchQuery, matchesSearch};
+return {cards, matchesSearch};
 }

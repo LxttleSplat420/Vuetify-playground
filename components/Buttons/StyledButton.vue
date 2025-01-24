@@ -227,18 +227,13 @@
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
-                    <v-col>
-                      <v-checkbox label="Auto Width" v-model="useButtonStyleStore().styled.AutoWidth"
-                        @change="useButtonStyleStore().styledAutoWidth">
-                      </v-checkbox>
-                      <v-checkbox label="Auto Height" v-model="useButtonStyleStore().styled.AutoHeight"
-                        @change="useButtonStyleStore().styledAutoHeight">
-                      </v-checkbox>
+                    <v-col class="d-flex justify-start" cols="4">
+                      Adjust Size
                     </v-col>
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Default Width = 100, Height = 36
+                          Default: Width=100 & Height=36
                         </span>
                         <span v-else key="1">
                           Width: {{ useButtonStyleStore().styled.width }}, Height: {{
@@ -250,6 +245,19 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
+                <v-row>     
+                  <v-col>    
+                      <v-checkbox label="Auto Width" v-model="useButtonStyleStore().styled.AutoWidth"
+                        @change="useButtonStyleStore().styledAutoWidth">
+                      </v-checkbox>
+                    </v-col>       
+                    <v-col> 
+                      <v-checkbox label="Auto Height" v-model="useButtonStyleStore().styled.AutoHeight"
+                        @change="useButtonStyleStore().styledAutoHeight">
+                      </v-checkbox>        
+                    </v-col>        
+              </v-row>
+
                 <v-row>
                   <v-col>
                     <v-container fluid>
@@ -298,11 +306,11 @@
 </template>
 
 <script setup>
-import { useButtonStyleStore } from '~/stores/buttonStyle';
+import { useButtonStyleStore } from '~/stores/Buttons/buttonStyle';
 
 //Search Button Logic
 import { useSearchButtons } from '~/components/Buttons/SearchButtons.ts'; 
-const {cards, searchQuery, matchesSearch} = useSearchButtons();
+const {cards, matchesSearch} = useSearchButtons();
 
 </script>
 

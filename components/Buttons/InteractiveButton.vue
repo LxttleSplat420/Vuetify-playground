@@ -161,11 +161,11 @@
 </template>
 
 <script setup>
-import { useButtonInteractiveStore } from "~/stores/buttonInteractive";
+import { useButtonInteractiveStore } from "~/stores/Buttons/buttonInteractive";
 
 //Search Button Logic
 import { useSearchButtons } from '~/components/Buttons/SearchButtons.ts'; 
-const {cards, searchQuery, matchesSearch} = useSearchButtons();
+const {cards, matchesSearch} = useSearchButtons();
 
 </script>
 

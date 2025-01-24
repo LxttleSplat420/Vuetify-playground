@@ -1,6 +1,6 @@
 <template>
     <ClientOnly>
-        <ButtonsAppBar />
+        <SelectsAppBar />
     </ClientOnly>
 
     <div>
@@ -10,8 +10,7 @@
 
 <script setup>
 
-import ButtonsAppBar from '~/components/Buttons/ButtonsAppBar.vue';
-
+import SelectsAppBar from '~/components/Selects/SelectsAppBar.vue';
 
 definePageMeta({
     layout: 'navigationbar',
