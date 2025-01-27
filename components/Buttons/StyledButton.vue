@@ -12,7 +12,7 @@
 
           <v-btn :variant="useButtonStyleStore().styled.variant" :elevation="useButtonStyleStore().styled.elevation"
             :rounded="useButtonStyleStore().styled.rounded"
-            :color="useButtonStyleStore().styled.color === '' ? 'black' : useButtonStyleStore().styled.color"
+            :color="useButtonStyleStore().styled.color.toLowerCase() === '' ? 'black' : useButtonStyleStore().styled.color.toLowerCase()"
             :flat="useButtonStyleStore().styled.flat" :height="useButtonStyleStore().styled.height"
             :width="useButtonStyleStore().styled.width" :style="{ backgroundColor: 'white' }" class="my-auto">
             {{ useButtonStyleStore().styled.name }}

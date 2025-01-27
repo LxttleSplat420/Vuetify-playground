@@ -92,6 +92,7 @@ const tab = ref("individual");
 const components = [
   { title: 'Buttons', link: '/buttons' },  
   { title: 'Selects', link: '/selects' },
+  { title: 'Cards', link: '/cards' },
   { title: 'Test', link: '/test' },
 ];
 
