@@ -57,7 +57,9 @@
 
       <v-main>
         <v-card>
-          <v-tabs v-model="tab" bg-color="indigo" align-tabs="title">
+          <v-tabs 
+          v-if="$route.path !== '/'"
+          v-model="tab" bg-color="indigo" align-tabs="title">
             <v-tab :to="`${selectedItem}/individual`">Individual</v-tab>
             <v-tab :to="`${selectedItem}/shared`">Shared</v-tab>
           </v-tabs>

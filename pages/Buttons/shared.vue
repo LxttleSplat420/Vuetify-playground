@@ -1,16 +1,10 @@
 <template>
-    <ClientOnly>
-        <ButtonsAppBar />
-    </ClientOnly>
-
     <div>
         <h1>Coming Soon!!!</h1>
     </div>
 </template>
 
 <script setup>
-
-import ButtonsAppBar from '~/components/Buttons/ButtonsAppBar.vue';
 
 
 definePageMeta({
