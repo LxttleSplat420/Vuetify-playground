@@ -1,5 +1,4 @@
 <template>
-
     <ClientOnly>
         <StyledButton />
         <ActivityButton />

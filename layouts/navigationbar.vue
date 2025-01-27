@@ -92,7 +92,7 @@ const tab = ref("individual");
 const components = [
   { title: 'Buttons', link: '/buttons' },  
   { title: 'Selects', link: '/selects' },
-  { title: 'Testing', link: '/test' },
+  { title: 'Test', link: '/test' },
 ];
 
 function selectItem(component: any) {
