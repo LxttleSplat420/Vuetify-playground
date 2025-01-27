@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
 
 export const useComponentSearchStore = defineStore({
-  id: 'myComponentSearchStore',
+  id: 'useComponentSearchStoreStore',
   state: () => ({ 
-    searchQuery: "",
-
+    searchQuery: '',
   }),
   actions: {}
 })

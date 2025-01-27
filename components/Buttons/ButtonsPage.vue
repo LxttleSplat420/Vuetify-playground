@@ -1,9 +1,9 @@
 <template>
-    
-<StyledButton />
-<ActivityButton />
-<InteractiveButton />
-
+    <ClientOnly>
+        <StyledButton />
+        <ActivityButton />
+        <InteractiveButton />
+    </ClientOnly>
 </template>
 
 <script setup>
@@ -12,6 +12,4 @@ import ActivityButton from '@/components/Buttons/ActivityButton.vue';
 import InteractiveButton from '~/components/Buttons/InteractiveButton.vue';
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

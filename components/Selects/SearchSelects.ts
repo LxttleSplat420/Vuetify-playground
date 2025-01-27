@@ -3,13 +3,12 @@ import { useComponentSearchStore } from '~/stores/layouts/useComponentSearchStor
 // Search Query
 import { ref } from "vue";
 
-export function useSearchButtons() {
+export function useSearchSelects() {
 
 // Reactive data for cards and search query
 const cards = ref([
   { id: 0, title: "Styled" },
   { id: 1, title: "Activity" },
-  { id: 2, title: "Interactive" },
   // Add more cards as needed
 ]);
 
@@ -18,5 +17,5 @@ const matchesSearch = (card: any) => {
   return card.title.toLowerCase().includes(useComponentSearchStore().searchQuery.toLowerCase());
 };
 
-return {cards, matchesSearch};
+return {cards,  matchesSearch};
 }
