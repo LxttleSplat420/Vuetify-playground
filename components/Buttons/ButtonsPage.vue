@@ -1,7 +1,6 @@
 <template>
 
     <ClientOnly>
-        <ButtonsAppBar />
         <StyledButton />
         <ActivityButton />
         <InteractiveButton />

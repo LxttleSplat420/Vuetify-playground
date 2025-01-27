@@ -1,4 +1,4 @@
-import { useComponentSearchButtonsStore } from '~/stores/Buttons/componentSearchButtons';
+import { useComponentSearchStore } from '~/stores/layouts/useComponentSearchStore';
 
 // Search Query
 import { ref } from "vue";
@@ -15,7 +15,7 @@ const cards = ref([
 
 // Computed property for filtered cards
 const matchesSearch = (card: any) => {
-  return card.title.toLowerCase().includes(useComponentSearchButtonsStore().searchQuery.toLowerCase());
+  return card.title.toLowerCase().includes(useComponentSearchStore().searchQuery.toLowerCase());
 };
 
 return {cards, matchesSearch};

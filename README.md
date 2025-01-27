@@ -13,7 +13,7 @@
 2) Shared functionality for collaboration
 
 # Known bugs/ issues
-1) Webpage sometimes makes a blank space near the top of the screen when switching between shared and individual tabs. (Visual glitch only)
+1) Webpage sometimes makes a blank space near the top of the screen when switching between shared and individual tabs. (Visual glitch only) (Should be fixed now using the new app bar search)
 2) Warnings occur when parsing "auto" to either the width or height properties of the Styled Button, but does not appear to break any functionality.
 
 # Things to note after downloading project from gitHub

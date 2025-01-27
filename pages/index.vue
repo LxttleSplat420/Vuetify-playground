@@ -1,5 +1,4 @@
 <script setup>
-import HomeAppBar from '~/components/HomePage/HomeAppBar.vue'
 
  definePageMeta({
    layout: 'navigationbar',
