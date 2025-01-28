@@ -1,27 +1,42 @@
 <template>
 
   <!-- Styled Button -->
-  <v-card elevation="5" v-if="matchesSearch(cards[0])" color="#e9eaf5">
+  <v-card elevation="5" v-if="matchesSearch(cards[cardId])" color="#e9eaf5">
     <v-container fluid fill-height>
       <v-row justify="center">
+
+        <!-- Author and Co-Author Labels -->
+        <v-col cols="auto">
+          <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+            <v-spacer></v-spacer>
+            <div style="text-align: left;">
+              <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
+              </v-row>
+              <v-row style="color: #656cbe;">Co-Author: {{ cards[cardId].coAuthor }}</v-row>
+            </div>
+          </v-container>
+        </v-col>
+
         <v-col align="center" class="d-flex flex-column align-center justify-start">
 
           <v-card-title :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }">
-            {{ cards[0].title }}
+            {{ cards[cardId].title }}
           </v-card-title>
 
-          <v-btn :variant="useButtonStyleStore().styled.variant" :elevation="useButtonStyleStore().styled.elevation"
-            :rounded="useButtonStyleStore().styled.rounded"
-            :color="useButtonStyleStore().styled.color.toLowerCase() === '' ? 'black' : useButtonStyleStore().styled.color.toLowerCase()"
-            :flat="useButtonStyleStore().styled.flat" :height="useButtonStyleStore().styled.height"
-            :width="useButtonStyleStore().styled.width" :style="{ backgroundColor: 'white' }" class="my-auto">
-            {{ useButtonStyleStore().styled.name }}
+          <v-btn :variant="useButtonStore.styled.variant" :elevation="useButtonStore.styled.elevation"
+            :rounded="useButtonStore.styled.rounded"
+            :color="useButtonStore.styled.color.toLowerCase() === '' ? 'black' : useButtonStore.styled.color.toLowerCase()"
+            :flat="useButtonStore.styled.flat" :height="useButtonStore.styled.height"
+            :width="useButtonStore.styled.width" :style="{ backgroundColor: 'white !important' }" class="my-auto">
+            {{ useButtonStore.styled.name }}
           </v-btn>
+
+          <!-- <StyledButtonComponent/> -->
+
         </v-col>
 
         <v-col cols="auto">
-          <v-expansion-panels v-model="useButtonStyleStore().panelOpen" style="max-width: 400px;"
-            position-absolute="right-0">
+          <v-expansion-panels v-model="useButtonStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
 
             <!-- Caption -->
             <v-expansion-panel>
@@ -37,7 +52,7 @@
                           Enter a button caption
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStyleStore().styled.name }}
+                          {{ useButtonStore.styled.name }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -45,7 +60,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-text-field v-model="useButtonStyleStore().styled.name" hide-details clearable></v-text-field>
+                <v-text-field v-model="useButtonStore.styled.name" hide-details clearable></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -62,7 +77,7 @@
                         Select Variant Type
                       </span>
                       <span v-else key="1">
-                        {{ useButtonStyleStore().styled.variant }}
+                        {{ useButtonStore.styled.variant }}
                       </span>
                     </v-fade-transition>
                   </v-col>
@@ -71,8 +86,8 @@
               <v-expansion-panel-text>
                 <v-row no-gutters>
                   <v-col>
-                    <v-select v-model="useButtonStyleStore().styled.variant" :items="useButtonStyleStore().variants"
-                      chips flat></v-select>
+                    <v-select v-model="useButtonStore.styled.variant" :items="useButtonStore.variants" chips
+                      flat></v-select>
                   </v-col>
                 </v-row>
 
@@ -80,7 +95,7 @@
             </v-expansion-panel>
 
             <!-- Elevation -->
-            <v-expansion-panel :disabled="useButtonStyleStore().styled.flat">
+            <v-expansion-panel :disabled="useButtonStore.styled.flat">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
@@ -93,7 +108,7 @@
                           Set elevated amount (default = 2)
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStyleStore().styled.elevation }}
+                          {{ useButtonStore.styled.elevation }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -109,7 +124,7 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-text-field v-model="useButtonStyleStore().styled.elevation" label="Elevation Amount"
+                            <v-text-field v-model="useButtonStore.styled.elevation" label="Elevation Amount"
                               type="number" :min="0" :max="24" hint="Between 0 and 24 (default = 2)" persistent-hint
                               outlined width="220"></v-text-field>
                           </v-col>
@@ -138,7 +153,7 @@
                           Set rounded amount (default = 0)
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStyleStore().styled.rounded }}
+                          {{ useButtonStore.styled.rounded }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -154,8 +169,8 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-select v-model="useButtonStyleStore().styled.rounded"
-                              :items="useButtonStyleStore().rounding" chips flat></v-select>
+                            <v-select v-model="useButtonStore.styled.rounded" :items="useButtonStore.rounding" chips
+                              flat></v-select>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -182,7 +197,7 @@
                           Enter a color
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStyleStore().styled.color === "" ? "black" : useButtonStyleStore().styled.color }}
+                          {{ useButtonStore.styled.color === "" ? "black" : useButtonStore.styled.color }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -190,8 +205,8 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-text-field v-model="useButtonStyleStore().styled.color" placeholder="black" hide-details clearable
-                  @click:clear="useButtonStyleStore().onClearStyled"></v-text-field>
+                <v-text-field v-model="useButtonStore.styled.color" placeholder="black" hide-details clearable
+                  @click:clear="useButtonStore.onClearStyled"></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -209,7 +224,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStyleStore().styled.flat }}
+                          {{ useButtonStore.styled.flat }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -217,8 +232,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useButtonStyleStore().styled.flat"
-                  @change="useButtonStyleStore().ChangeFlat"></v-checkbox>
+                <v-checkbox v-model="useButtonStore.styled.flat" @change="useButtonStore.ChangeFlat"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -236,8 +250,8 @@
                           Default: Width=100 & Height=36
                         </span>
                         <span v-else key="1">
-                          Width: {{ useButtonStyleStore().styled.width }}, Height: {{
-                            useButtonStyleStore().styled.height }}
+                          Width: {{ useButtonStore.styled.width }}, Height: {{
+                            useButtonStore.styled.height }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -245,18 +259,18 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-row>     
-                  <v-col>    
-                      <v-checkbox label="Auto Width" v-model="useButtonStyleStore().styled.AutoWidth"
-                        @change="useButtonStyleStore().styledAutoWidth">
-                      </v-checkbox>
-                    </v-col>       
-                    <v-col> 
-                      <v-checkbox label="Auto Height" v-model="useButtonStyleStore().styled.AutoHeight"
-                        @change="useButtonStyleStore().styledAutoHeight">
-                      </v-checkbox>        
-                    </v-col>        
-              </v-row>
+                <v-row>
+                  <v-col>
+                    <v-checkbox label="Auto Width" v-model="useButtonStore.styled.AutoWidth"
+                      @change="useButtonStore.styledAutoWidth">
+                    </v-checkbox>
+                  </v-col>
+                  <v-col>
+                    <v-checkbox label="Auto Height" v-model="useButtonStore.styled.AutoHeight"
+                      @change="useButtonStore.styledAutoHeight">
+                    </v-checkbox>
+                  </v-col>
+                </v-row>
 
                 <v-row>
                   <v-col>
@@ -264,13 +278,13 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-text-field :disabled="useButtonStyleStore().styled.AutoWidth"
-                              v-model="useButtonStyleStore().styled.width" label="Width" type="number" :min="0"
-                              persistent-hint outlined width="100"></v-text-field>
+                            <v-text-field :disabled="useButtonStore.styled.AutoWidth"
+                              v-model="useButtonStore.styled.width" label="Width" type="number" :min="0" persistent-hint
+                              outlined width="100"></v-text-field>
                           </v-col>
                           <v-col>
-                            <v-btn :disabled="useButtonStyleStore().styled.AutoWidth"
-                              @click="useButtonStyleStore().ResetWidth">Reset Width</v-btn>
+                            <v-btn :disabled="useButtonStore.styled.AutoWidth" @click="useButtonStore.ResetWidth">Reset
+                              Width</v-btn>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -278,13 +292,14 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-text-field :disabled="useButtonStyleStore().styled.AutoHeight"
-                              v-model="useButtonStyleStore().styled.height" label="Height" type="number" :min="0"
+                            <v-text-field :disabled="useButtonStore.styled.AutoHeight"
+                              v-model="useButtonStore.styled.height" label="Height" type="number" :min="0"
                               persistent-hint outlined width="100"></v-text-field>
                           </v-col>
                           <v-col>
-                            <v-btn :disabled="useButtonStyleStore().styled.AutoHeight"
-                              @click="useButtonStyleStore().ResetHeight">Reset Height</v-btn>
+                            <v-btn :disabled="useButtonStore.styled.AutoHeight"
+                              @click="useButtonStore.ResetHeight">Reset
+                              Height</v-btn>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -306,12 +321,18 @@
 </template>
 
 <script setup>
-import { useButtonStyleStore } from '~/stores/Buttons/buttonStyle';
+import { useButtonStyleStore } from '~/Authors/Stefan/stores/Buttons/buttonStyle';
+
+//Component Variables
+const useButtonStore = useButtonStyleStore();
+const cardId = 0; //Search card ID
 
 //Search Button Logic
-import { useSearchButtons } from '~/components/Buttons/SearchButtons.ts'; 
-const {cards, matchesSearch} = useSearchButtons();
+import { useSearchButtons } from '~/Authors/Stefan/components/Buttons/SearchButtons';
+const { cards, matchesSearch } = useSearchButtons();
 
 </script>
+
+
 
 <style lang="scss" scoped></style>

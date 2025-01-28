@@ -1,6 +1,6 @@
 <script setup>
 
-import WelcomeDialogue from '~/components/HomePage/WelcomeDialogue.vue';
+import WelcomeDialogue from '~/Authors/Stefan/components/HomePage/WelcomeDialogue.vue';
 
  definePageMeta({
    layout: 'navigationbar',

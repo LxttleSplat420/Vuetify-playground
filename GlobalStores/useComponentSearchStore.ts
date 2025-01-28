@@ -4,6 +4,7 @@ export const useComponentSearchStore = defineStore({
   id: 'useComponentSearchStoreStore',
   state: () => ({ 
     searchQuery: '',
+    filter: 'Component Type',
   }),
   actions: {}
 })

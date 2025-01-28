@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import CardsPage from '~/components/Cards/CardsPage.vue';
+import CardsPage from '~/Authors/Stefan/components/Cards/CardsPage.vue';
 
 definePageMeta({
   layout: 'navigationbar',
