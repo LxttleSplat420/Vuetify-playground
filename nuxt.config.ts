@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-
   debug: false,
   ssr: true,
 
@@ -12,5 +11,5 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['vuetify-nuxt-module', '@pinia/nuxt']
+  modules: ['vuetify-nuxt-module', '@pinia/nuxt'],
 })

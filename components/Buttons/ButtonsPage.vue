@@ -1,15 +1,13 @@
 <template>
     <ClientOnly>
-        <StyledButton />
-        <ActivityButton />
-        <InteractiveButton />
+        <Stefan/>
+        <Alienbushman/>
     </ClientOnly>
 </template>
 
 <script setup>
-import StyledButton from '@/components/Buttons/StyledButton.vue';
-import ActivityButton from '@/components/Buttons/ActivityButton.vue';
-import InteractiveButton from '~/components/Buttons/InteractiveButton.vue';
+import Stefan from '~/components/Buttons/Stefan/StefanButtonsPage.vue';
+import Alienbushman from '~/components/Buttons/Alienbushman/AlienButtonsPage.vue';
 </script>
 
 <style lang="scss" scoped></style>
