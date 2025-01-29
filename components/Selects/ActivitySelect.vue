@@ -87,14 +87,14 @@
 </template>
 
 <script setup>
-import { useMySelectActivityStore } from '~/Authors/Stefan/stores/Selects/selectActivity';
+import { useMySelectActivityStore } from '~/stores/Selects/selectActivity';
 
 //Component Variables
 const useSelectsStore = useMySelectActivityStore();
 const cardId = 1; //Search card ID
 
 //Search Button Logic
-import { useSearchSelects } from '~/Authors/Stefan/components/Selects/SearchSelects';
+import { useSearchSelects } from '~/components/Selects/SearchSelects';
 const { cards, matchesSearch } = useSearchSelects();
 
 

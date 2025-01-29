@@ -1,6 +1,5 @@
 
 import { defineStore } from 'pinia';
-import { Ripple } from 'vuetify/directives';
 
 export const useButtonActivityStore = defineStore('buttonActivity', {
   state: () => ({

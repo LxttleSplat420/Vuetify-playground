@@ -1,5 +1,5 @@
 <script setup>
-import ButtonsPage from '~/Authors/Stefan/components/Buttons/ButtonsPage.vue';
+import ButtonsPage from '~/components/Buttons/Stefan/StefanButtonsPage.vue';
 
 definePageMeta({
   layout: 'navigationbar',

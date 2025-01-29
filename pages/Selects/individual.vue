@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import SelectsPage from '~/Authors/Stefan/components/Selects/SelectsPage.vue';
+import SelectsPage from '~/components/Selects/SelectsPage.vue';
 
 definePageMeta({
   layout: 'navigationbar',

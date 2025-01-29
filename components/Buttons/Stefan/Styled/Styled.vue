@@ -12,7 +12,7 @@
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
               </v-row>
-              <v-row style="color: #656cbe;">Co-Author: {{ cards[cardId].coAuthor }}</v-row>
+              <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
             </div>
           </v-container>
         </v-col>
@@ -321,14 +321,14 @@
 </template>
 
 <script setup>
-import { useButtonStyleStore } from '~/Authors/Stefan/stores/Buttons/buttonStyle';
+import { useButtonStyleStore } from '~/stores/Buttons/Stefan/Styled';
 
 //Component Variables
 const useButtonStore = useButtonStyleStore();
 const cardId = 0; //Search card ID
 
 //Search Button Logic
-import { useSearchButtons } from '~/Authors/Stefan/components/Buttons/SearchButtons';
+import { useSearchButtons } from '~/components/Buttons/Stefan/StefanSearchButtons.ts'; //Add card search info here
 const { cards, matchesSearch } = useSearchButtons();
 
 </script>

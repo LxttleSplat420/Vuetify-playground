@@ -35,13 +35,13 @@
               <v-avatar size="24" v-if="useCardStore.appendItem.includes('Avatar')">
                 <v-img alt="John" src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
               </v-avatar>
-              <!-- <v-btn v-if="useMySlotsCardStore().appendItem.includes('Styled Button')" :variant="useButtonStyleStore().styled.variant" :elevation="useButtonStyleStore().styled.elevation"
+              <v-btn v-if="useMySlotsCardStore().appendItem.includes('Styled Button')" :variant="useButtonStyleStore().styled.variant" :elevation="useButtonStyleStore().styled.elevation"
             :rounded="useButtonStyleStore().styled.rounded"
             :color="useButtonStyleStore().styled.color.toLowerCase() === '' ? 'black' : useButtonStyleStore().styled.color.toLowerCase()"
             :flat="useButtonStyleStore().styled.flat" :height="useButtonStyleStore().styled.height"
             :width="useButtonStyleStore().styled.width" :style="{ backgroundColor: 'white !important' }" class="my-auto">
             {{ useButtonStyleStore().styled.name }}
-          </v-btn> -->
+          </v-btn>
 
 
             </template>
@@ -122,15 +122,15 @@
 </template>
 
 <script setup>
-import { useMySlotsCardStore } from '~/Authors/Stefan/stores/Cards/SlotsCard';
-import { useButtonStyleStore } from '~/Authors/Stefan/stores/Buttons/buttonStyle';
+import { useMySlotsCardStore } from '~/stores/Cards/SlotsCard';
+import { useButtonStyleStore } from '~/components/Buttons/StyledButtons/stores/StefanStyle';
 
 //Component Variables
 const useCardStore = useMySlotsCardStore();
 const cardId = 2; //Search card ID
 
 //Search Button Logic
-import { useSearchCards } from '~/Authors/Stefan/components/Cards/SearchCards';
+import { useSearchCards } from '~/components/Cards/SearchCards';
 const { cards, matchesSearch } = useSearchCards();
 
 //Imports for Slot components

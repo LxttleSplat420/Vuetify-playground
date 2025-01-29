@@ -88,7 +88,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-import { useComponentSearchStore } from '~/GlobalStores/useComponentSearchStore';
+import { useComponentSearchStore } from '~/stores/useComponentSearchStore';
 
 const drawer = ref(null);
 const selectedItem = ref("/buttons");
@@ -140,6 +140,12 @@ watch(isLightTheme, (newValue: boolean) => {
 const onClick = (filterType : any) => {
   isSearchVisible.value = true;
   useComponentSearchStore().filter = filterType;  
+
+  nextTick(() => {
+    if (searchField.value !== null) {
+      searchField.value.focus(); // Focus the search input when visible
+    }
+  });
 };
 
 </script>

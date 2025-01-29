@@ -1,15 +1,14 @@
-import { useComponentSearchStore } from '~/GlobalStores/useComponentSearchStore';
+import { useComponentSearchStore } from '~/stores/useComponentSearchStore';
 
 // Search Query
 import { ref } from "vue";
 
-export function useSearchCards() {
+export function useSearchSelects() {
 
 // Reactive data for cards and search query
 const cards = ref([
-  { id: 0, title: "Styled" , author: "Stefan" , coAuthor: "None" },
-  { id: 1, title: "Interactive" , author: "Stefan" , coAuthor: "None" },
-  { id: 2, title: "Slots" , author: "Stefan" , coAuthor: "None" },
+  { id: 0, title: "Styled", author: "Stefan" , coAuthor: "None" },
+  { id: 1, title: "Activity", author: "Stefan" , coAuthor: "None" },
   // Add more cards as needed
 ]);
 
@@ -24,5 +23,5 @@ const matchesSearch = (card: any) => {
   }
 };
 
-return {cards, matchesSearch};
+return {cards,  matchesSearch};
 }

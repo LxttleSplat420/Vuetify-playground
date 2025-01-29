@@ -1,4 +1,4 @@
-import { useComponentSearchStore } from '~/GlobalStores/useComponentSearchStore';
+import { useComponentSearchStore } from '~/stores/useComponentSearchStore';
 
 // Search Query
 import { ref } from "vue";
@@ -7,9 +7,8 @@ export function useSearchButtons() {
 
 // Reactive data for cards and search query
 const cards = ref([
-  { id: 0, title: "Styled" , author: "Stefan" , coAuthor: "None"},
-  { id: 1, title: "Activity", author: "Stefan", coAuthor: "No one"  },
-  { id: 2, title: "Interactive", author: "Stefan", coAuthor: "NA"  },
+  { id: 0, title: "Styled" , author: "Alienbushman" , coAuthor:[ "Stefan","Tester"]},
+  { id: 1, title: "Test" , author: "Alienbushman" , coAuthor:[ "Tester"]},
   // Add more cards as needed
 ]);
 
@@ -20,7 +19,9 @@ const matchesSearch = (card: any) => {
   } else if (useComponentSearchStore().filter === "Author"){
     return card.author.toLowerCase().includes(useComponentSearchStore().searchQuery.toLowerCase());
   } else if (useComponentSearchStore().filter === "Co-Author"){
-    return card.coAuthor.toLowerCase().includes(useComponentSearchStore().searchQuery.toLowerCase());
+    return card.coAuthor.some((coAuthor: string) => 
+      coAuthor.toLowerCase().includes(useComponentSearchStore().searchQuery.toLowerCase())
+    ); 
   }
 };
 

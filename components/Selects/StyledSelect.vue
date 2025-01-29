@@ -1,15 +1,15 @@
 <template>
-  <!-- Activity Button -->
   <v-card elevation="5" v-if="matchesSearch(cards[cardId])" color="#e9eaf5">
+    <v-container fluid fill-height>
+      <v-row justify="center">
 
-    <v-container fluid fill-height >
-      <v-row>
+        <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
             <v-spacer></v-spacer>
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
-                </v-row>
+              </v-row>
               <v-row style="color: #656cbe;">Co-Author: {{ cards[cardId].coAuthor }}</v-row>
             </div>
           </v-container>
@@ -21,28 +21,75 @@
             {{ cards[cardId].title }}
           </v-card-title>
 
-
-          <v-btn :active="useButtonStore.active" :disabled="useButtonStore.disabled"
-            :loading="useButtonStore.loading !== 'false' ? useButtonStore.loading : false"
-            :ripple="useButtonStore.ripple === 'false' ? false : { class: 'text-' + useButtonStore.ripple }"
-            class="my-auto">
-            {{ cards[cardId].title }} Button
-          </v-btn>
-
-
+          <v-select :label="useSelectsStore.label" :items="useSelectsStore.items" :variant="useSelectsStore.variant"
+            :clearable="useSelectsStore.clearable" :multiple="useSelectsStore.multiple" :chips="useSelectsStore.chips"
+            width="500">
+          </v-select>
         </v-col>
 
         <v-col cols="auto">
-          <v-expansion-panels v-model="useButtonStore.panelOpen" style="max-width: 400px;"
-            position-absolute="right-0">
+          <v-expansion-panels v-model="useSelectsStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
 
-            <!-- Active -->
+            <!-- Label -->
             <v-expansion-panel style="width: 400px;">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
                     <v-col class="d-flex justify-start" cols="4">
-                      Active
+                      Label
+                    </v-col>
+                    <v-col class="text-grey" cols="8">
+                      <v-fade-transition leave-absolute>
+                        <span v-if="expanded" key="0">
+                          Enter a label
+                        </span>
+                        <span v-else key="1">
+                          {{ useSelectsStore.label }}
+                        </span>
+                      </v-fade-transition>
+                    </v-col>
+                  </v-row>
+                </template>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-text-field v-model="useSelectsStore.label" hide-details clearable></v-text-field>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Variant -->
+            <v-expansion-panel style="width: 400px;">
+              <v-expansion-panel-title>
+                <template v-slot:default="{ expanded }">
+                  <v-row no-gutters>
+                    <v-col class="d-flex justify-start" cols="4">
+                      Variant
+                    </v-col>
+                    <v-col class="text-grey" cols="8">
+                      <v-fade-transition leave-absolute>
+                        <span v-if="expanded" key="0">
+                          Select a Variant
+                        </span>
+                        <span v-else key="1">
+                          {{ useSelectsStore.variant }}
+                        </span>
+                      </v-fade-transition>
+                    </v-col>
+                  </v-row>
+                </template>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-select :items="useSelectsStore.variants" v-model="useSelectsStore.variant"
+                  label="Variant type:"></v-select>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Clearable -->
+            <v-expansion-panel style="width: 400px;">
+              <v-expansion-panel-title>
+                <template v-slot:default="{ expanded }">
+                  <v-row no-gutters>
+                    <v-col class="d-flex justify-start" cols="4">
+                      Clearable
                     </v-col>
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
@@ -50,7 +97,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.active }}
+                          {{ useSelectsStore.clearable }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -58,17 +105,43 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useButtonStore.active"></v-checkbox>
+                <v-checkbox v-model="useSelectsStore.clearable"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
-            <!-- Disabled -->
+            <!-- Multiple -->
             <v-expansion-panel style="width: 400px;">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
                     <v-col class="d-flex justify-start" cols="4">
-                      Disabled
+                      Multiple
+                    </v-col>
+                    <v-col class="text-grey" cols="8">
+                      <v-fade-transition leave-absolute>
+                        <span v-if="expanded" key="0">
+                          Enable/ Disable (Multiple items can be selected)
+                        </span>
+                        <span v-else key="1">
+                          {{ useSelectsStore.multiple }}
+                        </span>
+                      </v-fade-transition>
+                    </v-col>
+                  </v-row>
+                </template>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <v-checkbox v-model="useSelectsStore.multiple"></v-checkbox>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Chips -->
+            <v-expansion-panel style="width: 400px;">
+              <v-expansion-panel-title>
+                <template v-slot:default="{ expanded }">
+                  <v-row no-gutters>
+                    <v-col class="d-flex justify-start" cols="4">
+                      Chips
                     </v-col>
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
@@ -76,7 +149,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.disabled }}
+                          {{ useSelectsStore.chips }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -84,80 +157,9 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useButtonStore.disabled"></v-checkbox>
+                <v-checkbox v-model="useSelectsStore.chips"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
-
-            <!-- Loading -->
-            <v-expansion-panel>
-              <v-expansion-panel-title>
-                <template v-slot:default="{ expanded }">
-                  <v-row no-gutters>
-                    <v-col class="d-flex justify-start" cols="4">
-                      Loading bar
-                    </v-col>
-                    <v-col class="text-grey" cols="8">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="expanded" key="0">
-                          Enable/ Disable and set a color
-                        </span>
-                        <span v-else key="1">
-                          {{ useButtonStore.loading }}
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </template>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text>
-                <v-col>
-                  <v-checkbox v-model="useButtonStore.isLoading"
-                    @change="useButtonStore.enableLoading()"></v-checkbox>
-                </v-col>
-                <v-col>
-                  <v-text-field v-model="useButtonStore.loading"
-                    :disabled="!useButtonStore.isLoading" placeholder="primary" hide-details clearable
-                    @click:clear="useButtonStore.clearLoadingColor"></v-text-field>
-                </v-col>
-
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Ripple -->
-            <v-expansion-panel :disabled="useButtonStore.isLoading">
-              <v-expansion-panel-title>
-                <template v-slot:default="{ expanded }">
-                  <v-row no-gutters>
-                    <v-col class="d-flex justify-start" cols="4">
-                      Ripple
-                    </v-col>
-                    <v-col class="text-grey" cols="8">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="expanded" key="0">
-                          Enable/ Disable and set a color
-                        </span>
-                        <span v-else key="1">
-                          {{ useButtonStore.ripple }}
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </template>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text>
-                <v-col>
-                  <v-checkbox v-model="useButtonStore.isRipple"
-                    @change="useButtonStore.enableRipple()"></v-checkbox>
-                </v-col>
-                <v-col>
-                  <v-text-field v-model="useButtonStore.ripple" :disabled="!useButtonStore.isRipple"
-                    placeholder="true" hide-details clearable
-                    @click:clear="useButtonStore.clearRippleColor()"></v-text-field>
-                </v-col>
-
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
 
           </v-expansion-panels>
         </v-col>
@@ -167,16 +169,16 @@
 </template>
 
 <script setup>
-//Import component store
-import { useButtonActivityStore } from '~/Authors/Stefan/stores/Buttons/buttonActivity'
+import { useMySelectStyledStore } from '~/stores/Selects/selectStyled';
 
 //Component Variables
-const useButtonStore = useButtonActivityStore();
-const cardId = 1; //Search card ID
+const useSelectsStore = useMySelectStyledStore();
+const cardId = 0; //Search card ID
 
 //Search Button Logic
-import { useSearchButtons } from '~/Authors/Stefan/components/Buttons/SearchButtons'; //Add card search info here
-const { cards, matchesSearch } = useSearchButtons();
+import { useSearchSelects } from '~/components/Selects/SearchSelects';
+const { cards, matchesSearch } = useSearchSelects();
+
 
 </script>
 

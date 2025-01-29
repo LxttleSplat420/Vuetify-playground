@@ -252,14 +252,14 @@
 </template>
 
 <script setup>
-import { useMyStyledCardStore } from '~/Authors/Stefan/stores/Cards/StyledCard';
+import { useMyStyledCardStore } from '~/stores/Cards/StyledCard';
 
 //Component Variables
 const useCardStore = useMyStyledCardStore();
 const cardId = 0; //Search card ID
 
 //Search Button Logic
-import { useSearchCards } from '~/Authors/Stefan/components/Cards/SearchCards';
+import { useSearchCards } from '~/components/Cards/SearchCards';
 const { cards, matchesSearch } = useSearchCards();
 
 

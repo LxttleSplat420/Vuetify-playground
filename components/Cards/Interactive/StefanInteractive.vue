@@ -137,7 +137,7 @@
 </template>
 
 <script setup>
-import { useMyInteractiveCardStore } from '~/Authors/Stefan/stores/Cards/InteractiveCard';
+import { useMyInteractiveCardStore } from '~/stores/Cards/InteractiveCard';
 
 //Component Variables
 const useCardStore = useMyInteractiveCardStore();
@@ -145,7 +145,7 @@ const cardId = 1; //Search card ID
 
 
 //Search Button Logic
-import { useSearchCards } from '~/Authors/Stefan/components/Cards/SearchCards';
+import { useSearchCards } from '~/components/Cards/SearchCards';
 const { cards, matchesSearch } = useSearchCards();
 
 
