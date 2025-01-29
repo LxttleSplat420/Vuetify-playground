@@ -9,7 +9,7 @@
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
               </v-row>
-              <v-row style="color: #656cbe;">Co-Author: {{ cards[cardId].coAuthor }}</v-row>
+              <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
             </div>
           </v-container>
         </v-col>
@@ -137,7 +137,7 @@
 </template>
 
 <script setup>
-import { useMyInteractiveCardStore } from '~/stores/Cards/InteractiveCard';
+import { useMyInteractiveCardStore } from '~/stores/Cards/Stefan/InteractiveCard';
 
 //Component Variables
 const useCardStore = useMyInteractiveCardStore();
@@ -145,7 +145,7 @@ const cardId = 1; //Search card ID
 
 
 //Search Button Logic
-import { useSearchCards } from '~/components/Cards/SearchCards';
+import { useSearchCards } from '~/components/Cards/Stefan/StefanSearchCards';
 const { cards, matchesSearch } = useSearchCards();
 
 

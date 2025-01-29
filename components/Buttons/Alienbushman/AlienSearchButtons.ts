@@ -8,7 +8,7 @@ export function useSearchButtons() {
 // Reactive data for cards and search query
 const cards = ref([
   { id: 0, title: "Styled" , author: "Alienbushman" , coAuthor:[ "Stefan","Tester"]},
-  { id: 1, title: "Test" , author: "Alienbushman" , coAuthor:[ "Tester"]},
+  { id: 1, title: "Type_Ex_Styled" , author: "Alienbushman" , coAuthor:[ "Tester"]},
   // Add more cards as needed
 ]);
 

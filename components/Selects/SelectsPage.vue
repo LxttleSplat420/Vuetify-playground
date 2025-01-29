@@ -1,14 +1,11 @@
 <template>
-
-    <StyledSelect />
-    <ActivitySelect />
-
-
+    <ClientOnly>
+        <Stefan/>
+    </ClientOnly>
 </template>
 
 <script setup>
-import StyledSelect from '@/Authors/Stefan/components/Selects/StyledSelect.vue'
-import ActivitySelect from '@/Authors/Stefan/components/Selects/ActivitySelect.vue'
+import Stefan from '~/components/Selects/Stefan/StefanSelectsPage.vue';
 </script>
 
 <style lang="scss" scoped></style>

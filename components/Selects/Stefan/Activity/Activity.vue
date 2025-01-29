@@ -9,7 +9,7 @@
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
               </v-row>
-              <v-row style="color: #656cbe;">Co-Author: {{ cards[cardId].coAuthor }}</v-row>
+              <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
             </div>
           </v-container>
         </v-col>
@@ -87,14 +87,14 @@
 </template>
 
 <script setup>
-import { useMySelectActivityStore } from '~/stores/Selects/selectActivity';
+import { useMySelectActivityStore } from '~/stores/Selects/Stefan/selectActivity';
 
 //Component Variables
 const useSelectsStore = useMySelectActivityStore();
 const cardId = 1; //Search card ID
 
 //Search Button Logic
-import { useSearchSelects } from '~/components/Selects/SearchSelects';
+import { useSearchSelects } from '~/components/Selects/Stefan/StefanSearchSelects';
 const { cards, matchesSearch } = useSearchSelects();
 
 

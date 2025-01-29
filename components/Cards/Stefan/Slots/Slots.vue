@@ -9,7 +9,7 @@
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
               </v-row>
-              <v-row style="color: #656cbe;">Co-Author: {{ cards[cardId].coAuthor }}</v-row>
+              <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
             </div>
           </v-container>
         </v-col>
@@ -122,15 +122,15 @@
 </template>
 
 <script setup>
-import { useMySlotsCardStore } from '~/stores/Cards/SlotsCard';
-import { useButtonStyleStore } from '~/components/Buttons/StyledButtons/stores/StefanStyle';
+import { useMySlotsCardStore } from '~/stores/Cards/Stefan/SlotsCard';
+import { useButtonStyleStore } from '~/stores/Buttons/Stefan/Styled';
 
 //Component Variables
 const useCardStore = useMySlotsCardStore();
 const cardId = 2; //Search card ID
 
 //Search Button Logic
-import { useSearchCards } from '~/components/Cards/SearchCards';
+import { useSearchCards } from '~/components/Cards/Stefan/StefanSearchCards';
 const { cards, matchesSearch } = useSearchCards();
 
 //Imports for Slot components
