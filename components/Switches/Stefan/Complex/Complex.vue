@@ -24,35 +24,72 @@
           </v-card-title>
 
           <!-- Tooltip -->
-          <v-tooltip  v-bind="(useStore.tooltipAlwaysShow || useStore.panelOpen === 3) ? { modelValue: true, 'onUpdate:modelValue': () => {} } : {}" 
+          <v-tooltip  v-bind="(useStore.tooltipAlwaysShow || useStore.panelOpen === 4) ? { modelValue: true, 'onUpdate:modelValue': () => {} } : {}" 
             :location="useStore.tooltipPosition" 
             :open-delay="useStore.tooltipOpenDelay" :close-delay="useStore.tooltipCloseDelay">
             <template v-slot:activator="{ props }">
-
-              <!-- Badge -->
-               <v-badge left :color="useStore.badgeColor" location="top" :model-value="useStore.badgeShow"
-                :content="useStore.badgeContent"
-                :dot="useStore.badgeDot" 
-               >
-                <span slot="badge" ></span> <!--slot can be any component-->
-                <v-icon large color="primary">icon</v-icon>
               
-
-              <!-- Switch -->
-              <v-switch v-bind="props" :inset="useStore.inset" :model-value="true"
-                :true-icon="useStore.iconOn" :false-icon="useStore.iconOff" :color="useStore.color">
-                <template v-slot:label>
-                  {{useStore.label}}
-                </template>
+              <!-- Badge -->
+              <v-badge :color="useStore.badgeColor" :model-value="useStore.badgeShow"
+                :dot="useStore.badgeDot" 
+                location="top center"
+                :offset-y="useStore.badgeY"
                 
-              </v-switch>
+               >
+               <!-- Badge Slot Content -->
+                <template v-slot:badge>{{ useStore.badgeContent }} </template>
+                <!-- ----------- -->
+
+               <!-- Switch -->
+                <span>
+               <v-switch
+               v-bind="props" :inset="useStore.inset"
+               v-model="useStore.switchOn"
+                :true-icon="useStore.iconOn" :false-icon="useStore.iconOff" :color="useStore.sliderColorOn"
+                :base-color="useStore.sliderColorOff"
+                :style="{
+        '--v-switch-thumb-background': useStore.switchOn ? useStore.thumbColorBackgroundOn : useStore.thumbColorBackgroundOff,
+        '--v-switch-thumb-color': useStore.switchOn ? useStore.thumbColorIconOn : useStore.thumbColorIconOff
+      }"
+      
+                >
+                
+                <!-- Switch Slot Label -->
+                <template v-slot:label>                                      
+                  {{useStore.label}}
+                 </template>
+                 <!-- ------------ -->               
+                
+                 
+
+                </v-switch> 
+              </span>
+
               <!-- ----------------------Switch end------------------------- -->
+
+              
+              
             </v-badge>
             <!-- ------------------------Badge end-------------------------- -->
+         
 
-            </template>
+
+          </template>
             <!-- V-card in Tooltip -->
-            <v-card :title="useStore.tooltipTitle" :subtitle="useStore.tooltipSubtitle" :text="useStore.tooltipText">
+            <v-card>
+
+              <template v-slot:title>
+                {{ useStore.tooltipTitle }} 
+              <v-icon :icon="useStore.tooltipTitleIcon" location="end"></v-icon>
+              </template>
+
+              <template v-slot:subtitle>
+                {{ useStore.tooltipSubtitle }}
+              </template>
+
+              <v-card-text>
+                {{ useStore.tooltipText }}
+              </v-card-text>
 
             </v-card>
             <!-- ------------------V-card in Tooltip end-------------------- -->
@@ -135,7 +172,7 @@
                           Enter a Color
                         </span>
                         <span v-else key="1">
-                          {{ useStore.color }}
+                          Slider, thumb and icons
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -143,8 +180,39 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-text-field v-model="useStore.color" clearable
+                <v-text-field v-model="useStore.sliderColorOn" clearable
+                label="Slider On"
                 hint="Must be lowercase or Hexadecimal (#69F0AE)"
+                  placeholder="undefined"
+                  persistent-placeholder
+                  persistent-hint></v-text-field>
+                  <v-text-field v-model="useStore.sliderColorOff" clearable
+                  label="Slider Off"
+                hint="Must be lowercase or Hexadecimal (#69F0AE)"
+                  placeholder="undefined"
+                  persistent-placeholder
+                  persistent-hint></v-text-field>
+                  <v-text-field v-model="useStore.thumbColorBackgroundOn" clearable
+                  label="Thumb Background On"
+                hint="Must be lowercase or Hexadecimal (#69F0AE)"
+                  placeholder="undefined"
+                  persistent-placeholder
+                  persistent-hint></v-text-field>
+                  <v-text-field v-model="useStore.thumbColorIconOn" clearable
+                  label="Thumb Icon On"
+                  hint="Must be lowercase or Hexadecimal (#69F0AE)"
+                  placeholder="undefined"
+                  persistent-placeholder
+                  persistent-hint></v-text-field>
+                  <v-text-field v-model="useStore.thumbColorBackgroundOff" clearable
+                  label="Thumb Background Off"
+                hint="Must be lowercase or Hexadecimal (#69F0AE)"
+                  placeholder="undefined"
+                  persistent-placeholder
+                  persistent-hint></v-text-field>
+                  <v-text-field v-model="useStore.thumbColorIconOff" clearable
+                  label="Thumb Icon Off"
+                  hint="Must be lowercase or Hexadecimal (#69F0AE)"
                   placeholder="undefined"
                   persistent-placeholder
                   persistent-hint></v-text-field>
@@ -283,7 +351,11 @@
                   <v-checkbox v-model="useStore.badgeDot" label="Dot Badge"></v-checkbox>
                 </v-col>
               </v-row>
-              
+
+              <v-text-field v-model="useStore.badgeY" label="Badge Y-offset" type="number" :min="0"
+                  hint="Y-Offset = 10 recommended" persistent-hint outlined
+                  clearable @click:clear="useStore.badgeY = 0"></v-text-field>
+
                 <v-text-field
                   label="Badge Color:"
                   v-model="useStore.badgeColor"
@@ -325,4 +397,11 @@ const { cards, matchesSearch } = useSearchSwitches(); ////Remember to change use
 
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.v-switch__thumb) {
+  background-color: var(--v-switch-thumb-background) !important;  /* Dynamically apply thumb color */
+  color: var(--v-switch-thumb-color) !important;
+}
+
+
+</style>

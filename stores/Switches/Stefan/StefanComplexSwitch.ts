@@ -5,9 +5,15 @@ export const useMyStefanComplexSwitchStore = defineStore({ //Change useMyAuthorT
   state: () => ({ 
     panelOpen: null, //Used to open and close the selected Expansion Panel
     //Add other data variables/ arrays here
+    switchOn: true,
     label: 'Label',
     inset: true,
-    color: "primary",
+    thumbColorBackgroundOn: "blue",
+    thumbColorBackgroundOff: "black",
+    thumbColorIconOn: "yellow",
+    thumbColorIconOff: "white",    
+    sliderColorOn: "green",
+    sliderColorOff: "red",
     iconOn: 'mdi-weather-sunny',
     iconOff: 'mdi-weather-night',
     iconInsetOn: 'mdi-magnify',
@@ -18,10 +24,13 @@ export const useMyStefanComplexSwitchStore = defineStore({ //Change useMyAuthorT
     tooltipAlwaysShow: false,
     tooltipOpenDelay: "0",
     tooltipCloseDelay: "0",
+    tooltipTitleIcon: 'mdi-dots-vertical',
     badgeShow: true,
     badgeColor: "green",
     badgeContent: "+9",
-    badgeDot: false,
+    badgeDot: true,
+    badgeY: 10, 
+    badgeX: 0,
 
     tooltipPositions: ['bottom', 'top', 'left', 'right'],
 
