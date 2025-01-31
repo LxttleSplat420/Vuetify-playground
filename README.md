@@ -1,3 +1,5 @@
+![alt text](image-1.png)
+
 # How to use
 1) Navigate to different components using the navigation drawer on the top left. (Only Buttons and Selects page is currently active)
 2) Change to the individual or shared tab to work on personal or collaborative projects. (Shared page is currently in progress)
