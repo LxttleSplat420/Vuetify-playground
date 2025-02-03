@@ -98,6 +98,7 @@ const components = [
   { title: 'Buttons', link: '/buttons' },
   { title: 'Selects', link: '/selects' },
   { title: 'Cards', link: '/cards' },
+  { title: 'Switches', link: '/switches' },
   { title: 'Test', link: '/test' },
   //Add more component title and links for navigation
 ];
