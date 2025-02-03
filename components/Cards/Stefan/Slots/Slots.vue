@@ -42,8 +42,6 @@
             :width="useButtonStyleStore().styled.width" :style="{ backgroundColor: 'white !important' }" class="my-auto">
             {{ useButtonStyleStore().styled.name }}
               </v-btn>
-
-
             </template>
             <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</v-card-text>
           </v-card>

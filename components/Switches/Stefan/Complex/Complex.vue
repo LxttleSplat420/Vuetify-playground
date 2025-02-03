@@ -24,63 +24,59 @@
           </v-card-title>
 
           <!-- Tooltip -->
-          <v-tooltip  v-bind="(useStore.tooltipAlwaysShow || useStore.panelOpen === 4) ? { modelValue: true, 'onUpdate:modelValue': () => {} } : {}" 
-            :location="useStore.tooltipPosition" 
-            :open-delay="useStore.tooltipOpenDelay" :close-delay="useStore.tooltipCloseDelay">
+          <v-tooltip
+            v-bind="(useStore.tooltipAlwaysShow || useStore.panelOpen === 4) ? { modelValue: true, 'onUpdate:modelValue': () => { } } : {}"
+            :location="useStore.tooltipPosition" :open-delay="useStore.tooltipOpenDelay"
+            :close-delay="useStore.tooltipCloseDelay">
             <template v-slot:activator="{ props }">
-              
+
               <!-- Badge -->
-              <v-badge :color="useStore.badgeColor" :model-value="useStore.badgeShow"
-                :dot="useStore.badgeDot" 
-                location="top center"
-                :offset-y="useStore.badgeY"
-                
-               >
-               <!-- Badge Slot Content -->
+              <v-badge :color="useStore.badgeColor" :model-value="useStore.badgeShow" :dot="useStore.badgeDot"
+                location="top center" :offset-y="useStore.badgeY">
+                <!-- Badge Slot Content -->
                 <template v-slot:badge>{{ useStore.badgeContent }} </template>
                 <!-- ----------- -->
 
-               <!-- Switch -->
+                <!-- Switch -->
                 <span>
-               <v-switch
-               v-bind="props" :inset="useStore.inset"
-               v-model="useStore.switchOn"
-                :true-icon="useStore.iconOn" :false-icon="useStore.iconOff" :color="useStore.sliderColorOn"
-                :base-color="useStore.sliderColorOff"
-                :style="{
-        '--v-switch-thumb-background': useStore.switchOn ? useStore.thumbColorBackgroundOn : useStore.thumbColorBackgroundOff,
-        '--v-switch-thumb-color': useStore.switchOn ? useStore.thumbColorIconOn : useStore.thumbColorIconOff
-      }"
-      
-                >
-                
-                <!-- Switch Slot Label -->
-                <template v-slot:label>                                      
-                  {{useStore.label}}
-                 </template>
-                 <!-- ------------ -->               
-                
-                 
+                  <v-switch v-bind="props" :inset="useStore.inset" v-model="useStore.switchOn"
+                    :true-icon="useStore.thumbIconOn" :false-icon="useStore.thumbIconOff"
+                    :color="useStore.sliderColorOn" :base-color="useStore.sliderColorOff" :style="{
+                      '--v-switch-thumb-background': useStore.switchOn ? useStore.thumbColorBackgroundOn : useStore.thumbColorBackgroundOff,
+                      '--v-switch-thumb-color': useStore.switchOn ? useStore.thumbColorIconOn : useStore.thumbColorIconOff,
+                      '--v-switch-track-after-content': `'\\${useStore.trackIconOn}'`,
+                      '--v-switch-track-after-color' : useStore.trackColorIconOn,
+                      '--v-switch-track-before-content': `'\\${useStore.trackIconOff}'`,
+                      '--v-switch-track-before-color' : useStore.trackColorIconOff,
+                    }">
 
-                </v-switch> 
-              </span>
-
-              <!-- ----------------------Switch end------------------------- -->
-
-              
-              
-            </v-badge>
-            <!-- ------------------------Badge end-------------------------- -->
-         
+                    <!-- Switch Slot Label -->
+                    <template v-slot:label>
+                      {{ useStore.label }}
+                    </template>
+                    <!-- ------------ -->
+                    <template v-slot:track>defaultcontent</template>
 
 
-          </template>
+                  </v-switch>
+                </span>
+
+                <!-- ----------------------Switch end------------------------- -->
+
+
+
+              </v-badge>
+              <!-- ------------------------Badge end-------------------------- -->
+
+
+
+            </template>
             <!-- V-card in Tooltip -->
-            <v-card>
+            <v-card variant="tonal">
 
               <template v-slot:title>
-                {{ useStore.tooltipTitle }} 
-              <v-icon :icon="useStore.tooltipTitleIcon" location="end"></v-icon>
+                {{ useStore.tooltipTitle }}
+                <v-icon :icon="useStore.tooltipTitleIconAppended" location="end"></v-icon>
               </template>
 
               <template v-slot:subtitle>
@@ -129,7 +125,7 @@
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
-             
+
 
             <!-- Inset -->
             <v-expansion-panel width="400">
@@ -169,7 +165,7 @@
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Enter a Color
+                          Must be lowercase or Hexadecimal (#69F0AE)
                         </span>
                         <span v-else key="1">
                           Slider, thumb and icons
@@ -180,42 +176,30 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-text-field v-model="useStore.sliderColorOn" clearable
-                label="Slider On"
-                hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint></v-text-field>
-                  <v-text-field v-model="useStore.sliderColorOff" clearable
-                  label="Slider Off"
-                hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint></v-text-field>
-                  <v-text-field v-model="useStore.thumbColorBackgroundOn" clearable
-                  label="Thumb Background On"
-                hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint></v-text-field>
-                  <v-text-field v-model="useStore.thumbColorIconOn" clearable
-                  label="Thumb Icon On"
-                  hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint></v-text-field>
-                  <v-text-field v-model="useStore.thumbColorBackgroundOff" clearable
-                  label="Thumb Background Off"
-                hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint></v-text-field>
-                  <v-text-field v-model="useStore.thumbColorIconOff" clearable
-                  label="Thumb Icon Off"
-                  hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint></v-text-field>
+                <v-text-field v-model="useStore.sliderColorOn" clearable label="Slider On"
+                   placeholder="undefined" persistent-placeholder
+                  ></v-text-field>
+                <v-text-field v-model="useStore.sliderColorOff" clearable label="Slider Off"
+                   placeholder="undefined" persistent-placeholder
+                  ></v-text-field>
+                <v-text-field v-model="useStore.thumbColorBackgroundOn" clearable label="Thumb Background On"
+                   placeholder="undefined" persistent-placeholder
+                  ></v-text-field>
+                  <v-text-field v-model="useStore.thumbColorBackgroundOff" clearable label="Thumb Background Off"
+                   placeholder="undefined" persistent-placeholder
+                  ></v-text-field>
+                <v-text-field v-model="useStore.thumbColorIconOn" clearable label="Thumb Icon On"
+                  placeholder="undefined" persistent-placeholder
+                  ></v-text-field>                
+                <v-text-field v-model="useStore.thumbColorIconOff" clearable label="Thumb Icon Off"
+                  placeholder="undefined" persistent-placeholder
+                  ></v-text-field>
+                <v-text-field v-model="useStore.trackColorIconOn" clearable label="Track Icon On"
+                   placeholder="undefined" persistent-placeholder
+                  ></v-text-field>                
+                <v-text-field v-model="useStore.trackColorIconOff" clearable label="Track Icon Off"
+                   placeholder="undefined" persistent-placeholder
+                  ></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
@@ -231,13 +215,14 @@
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Enter a Icon name to use when:
+                          Enter a Icon name or Unicode (Check Hints):
                         </span>
                         <span v-else key="1">
                           <div>
-                            <p>On: {{ useStore.iconOn }}</p>
-                            <p>Inset On: {{ useStore.iconInsetOn }}</p>
-                            <p>Off: {{ useStore.iconOff }}</p>
+                            <p>Track On: {{ useStore.trackIconOn }}</p>
+                            <p>Track Off: {{ useStore.trackIconOff }}</p>
+                            <p>Thumb On: {{ useStore.thumbIconOn }}</p>
+                            <p>Thumb Off: {{ useStore.thumbIconOff }}</p>
                           </div>
                         </span>
                       </v-fade-transition>
@@ -246,10 +231,14 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-text-field v-model="useStore.iconOn" label="Switched On Icon:" clearable></v-text-field>
-                <v-text-field v-model="useStore.iconInsetOn" label="Switch On Inset Icon:" clearable></v-text-field>
-                <v-text-field v-model="useStore.iconOff" label="Switched Off Icon:" clearable></v-text-field>
-
+                <v-text-field v-model="useStore.thumbIconOn" label="Thumb On:" clearable
+                  hint="Must be mdi-iconName (mdi-magnify)"></v-text-field>
+                <v-text-field v-model="useStore.thumbIconOff" label="Thumb Off:" clearable
+                  hint="Must be mdi-iconName (mdi-magnify)"></v-text-field>
+                <v-text-field v-model="useStore.trackIconOn" label="Track On:" clearable
+                  hint="Must be mdi Unicode number (F0349)"></v-text-field>
+                <v-text-field v-model="useStore.trackIconOff" label="Track 0ff:" clearable
+                  hint="Must be mdi Unicode number (F0349)"></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
@@ -275,10 +264,12 @@
                   </v-row>
                 </template>
               </v-expansion-panel-title>
-              <v-expansion-panel-text>                
+              <v-expansion-panel-text>
                 <v-text-field v-model="useStore.tooltipTitle" clearable label="Title"></v-text-field>
                 <v-text-field v-model="useStore.tooltipSubtitle" clearable label="Subtitle"></v-text-field>
-                <v-text-field v-model="useStore.tooltipText" clearable label="Text"></v-text-field>
+                <v-text-field v-model="useStore.tooltipText" clearable label="Text"></v-text-field>                
+                <v-text-field v-model="useStore.tooltipTitleIconAppended" label="Tooltip Title Icon (Appended):" clearable
+                  hint="Must be mdi-iconName (mdi-magnify)"></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
@@ -306,23 +297,22 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-checkbox label="Always Show Tooltip" v-model="useStore.tooltipAlwaysShow"></v-checkbox>
-                <v-select
-                  :items="useStore.tooltipPositions"
-                  v-model="useStore.tooltipPosition"
-                  label="Tooltip Location"
-                ></v-select>
+                <v-select :items="useStore.tooltipPositions" v-model="useStore.tooltipPosition"
+                  label="Tooltip Location"></v-select>
                 <v-text-field v-model="useStore.tooltipOpenDelay" label="Open Delay (ms):" type="number" :min="0"
                   hint="Hover time required before tooltip opens" persistent-hint outlined
-                   :disabled="useStore.tooltipAlwaysShow" clearable @click:clear="useStore.tooltipOpenDelay = 0"></v-text-field>
-                  <v-text-field v-model="useStore.tooltipCloseDelay" label="Open Delay (ms):" type="number" :min="0"
+                  :disabled="useStore.tooltipAlwaysShow" clearable
+                  @click:clear="useStore.tooltipOpenDelay = 0"></v-text-field>
+                <v-text-field v-model="useStore.tooltipCloseDelay" label="Open Delay (ms):" type="number" :min="0"
                   hint="Time it takes for tooltip to disappear" persistent-hint outlined
-                   :disabled="useStore.tooltipAlwaysShow" clearable @click:clear="useStore.tooltipCloseDelay = 0"></v-text-field>
+                  :disabled="useStore.tooltipAlwaysShow" clearable
+                  @click:clear="useStore.tooltipCloseDelay = 0"></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
 
-             <!-- Badge -->
-             <v-expansion-panel width="400">
+            <!-- Badge -->
+            <v-expansion-panel width="400">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
@@ -344,32 +334,23 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-row>
-                <v-col cols="auto">
-                  <v-checkbox v-model="useStore.badgeShow" label="Show Badge"></v-checkbox>
-                </v-col>
-                <v-col>
-                  <v-checkbox v-model="useStore.badgeDot" label="Dot Badge"></v-checkbox>
-                </v-col>
-              </v-row>
+                  <v-col cols="auto">
+                    <v-checkbox v-model="useStore.badgeShow" label="Show Badge"></v-checkbox>
+                  </v-col>
+                  <v-col>
+                    <v-checkbox v-model="useStore.badgeDot" label="Dot Badge"></v-checkbox>
+                  </v-col>
+                </v-row>
 
-              <v-text-field v-model="useStore.badgeY" label="Badge Y-offset" type="number" :min="0"
-                  hint="Y-Offset = 10 recommended" persistent-hint outlined
-                  clearable @click:clear="useStore.badgeY = 0"></v-text-field>
+                <v-text-field v-model="useStore.badgeY" label="Badge Y-offset" type="number" :min="0"
+                  hint="Y-Offset = 10 recommended" persistent-hint outlined clearable
+                  @click:clear="useStore.badgeY = 0"></v-text-field>
 
-                <v-text-field
-                  label="Badge Color:"
-                  v-model="useStore.badgeColor"
-                  clearable
-                  hint="Must be lowercase or Hexadecimal (#69F0AE)"
-                  placeholder="undefined"
-                  persistent-placeholder
-                  persistent-hint
-                ></v-text-field>
-                <v-text-field :disabled="useStore.badgeDot"
-                  label="Badge Content:"
-                  v-model="useStore.badgeContent"
-                  clearable
-                ></v-text-field>
+                <v-text-field label="Badge Color:" v-model="useStore.badgeColor" clearable
+                  hint="Must be lowercase or Hexadecimal (#69F0AE)" placeholder="undefined" persistent-placeholder
+                  persistent-hint></v-text-field>
+                <v-text-field :disabled="useStore.badgeDot" label="Badge Content:" v-model="useStore.badgeContent"
+                  clearable></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
@@ -399,9 +380,27 @@ const { cards, matchesSearch } = useSearchSwitches(); ////Remember to change use
 
 <style lang="scss" scoped>
 :deep(.v-switch__thumb) {
-  background-color: var(--v-switch-thumb-background) !important;  /* Dynamically apply thumb color */
+  background-color: var(--v-switch-thumb-background) !important;
+  /* Dynamically apply thumb color */
   color: var(--v-switch-thumb-color) !important;
 }
 
+:deep(.v-switch__track::after) {
+  content: var(--v-switch-track-after-content) !important; // Unicode for mdi icon
+  font-family: 'Material Design Icons';
+  color: var(--v-switch-track-after-color);
+  font-size: 16px;
+  position: absolute;
+  left: 5px;
+}
 
+
+:deep(.v-switch__track::before) {
+  content: var(--v-switch-track-before-content); // Unicode for mdi icon
+  font-family: 'Material Design Icons';
+  color: var(--v-switch-track-before-color);
+  font-size: 16px;
+  position: absolute;
+  right: 5px;
+}
 </style>

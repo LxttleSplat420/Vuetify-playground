@@ -1,46 +1,31 @@
-<script setup>
-
-definePageMeta({
-  layout: 'navigationbar',
-});
-
-import { ref } from 'vue';
-
-const switchValue = ref(false); // Example reactive state for the switch
-const switchRef = ref(null); // Create a ref for the v-switch
-
-</script>
-
 <template>
-  <v-switch label="Example Switch" v-model="switchValue" on-label="sadas" />
+  <v-switch v-model="isOn" class="custom-switch">
+    <template v-slot:track>
+      <v-icon class="custom-icon">
+        {{ isOn ? 'mdi-check' : 'mdi-magnify' }}
+      </v-icon>
+    </template>
+  </v-switch>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+
+const isOn = ref(false)
+</script>
 
 <style scoped>
-:deep(.v-input--selection-controls__ripple) {
+.custom-switch {
   position: relative;
 }
 
-:deep(.v-switch__track) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-:deep(.v-switch__track::after) {
-  content: '';
-  color: white;
-  font-weight: bold;
+.custom-icon {
   position: absolute;
   left: 10px;
-}
-
-:deep(.v-switch__track::before) {
-  content: '';
   color: white;
-  font-weight: bold;
-  position: absolute;
-  right: 10px;
+  font-size: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease; /* Smooth transition */
 }
 </style>
-

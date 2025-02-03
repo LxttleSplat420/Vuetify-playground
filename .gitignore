@@ -24,4 +24,3 @@ logs
 !.env.example
 
 /node_modules
-/Templates
