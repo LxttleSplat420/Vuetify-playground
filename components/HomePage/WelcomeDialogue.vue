@@ -17,7 +17,7 @@
               Author)</h3>
               <h3> <v-icon class="mx-2">mdi-dots-vertical</v-icon> Currently no function</h3>
             <h3 class="d-flex align-center">
-              <v-switch readonly="" class="mr-2" v-model="isLightTheme" color="primary" true-icon="mdi-weather-sunny"
+              <v-switch :readonly="false" class="mr-2" v-model="isLightTheme" color="primary" true-icon="mdi-weather-sunny"
                 false-icon="mdi-weather-night" inset />
               Can be toggled to switch between dark and light mode. (Ex. Dark mode [the preferred theme])
             </h3>
@@ -42,14 +42,27 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 import { ref, onMounted } from 'vue'
 const dialogVisible = ref(false)
 
+//Update page URL when search query is entered
+const route = useRoute();
+const router = useRouter();
+
 onMounted(() => {
   // Automatically show dialog when page is mounted
-  dialogVisible.value = true
+  dialogVisible.value = true;
+  
+  nextTick(() => {
+    router.replace({ query: { ...route.query, Search: "", Filter: "Component Type" } }); //Update URL Search Term
+    
+    useComponentSearchStore().searchQuery = route.query.Search as string;    
+    useComponentSearchStore().filter = route.query.Filter as string;      
+
+  });
+
 })
 
 const theme = useTheme();

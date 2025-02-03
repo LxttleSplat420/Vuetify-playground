@@ -32,7 +32,7 @@
 
               <!-- Badge -->
               <v-badge :color="useStore.badgeColor" :model-value="useStore.badgeShow" :dot="useStore.badgeDot"
-                location="top center" :offset-y="useStore.badgeY">
+                :offset-x="useStore.badgeX" :offset-y="useStore.badgeY">
                 <!-- Badge Slot Content -->
                 <template v-slot:badge>{{ useStore.badgeContent }} </template>
                 <!-- ----------- -->
@@ -345,6 +345,9 @@
                 <v-text-field v-model="useStore.badgeY" label="Badge Y-offset" type="number" :min="0"
                   hint="Y-Offset = 10 recommended" persistent-hint outlined clearable
                   @click:clear="useStore.badgeY = 0"></v-text-field>
+                  <v-text-field v-model="useStore.badgeX" label="Badge X-offset" type="number" :min="0"
+                  hint="X-Offset = 50 Approx." persistent-hint outlined clearable
+                  @click:clear="useStore.badgeX = 0"></v-text-field>
 
                 <v-text-field label="Badge Color:" v-model="useStore.badgeColor" clearable
                   hint="Must be lowercase or Hexadecimal (#69F0AE)" placeholder="undefined" persistent-placeholder

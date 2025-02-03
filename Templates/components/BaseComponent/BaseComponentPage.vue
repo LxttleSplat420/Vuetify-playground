@@ -2,6 +2,8 @@
     <ClientOnly>
         <!-- Add All AuthorComponentPages here -->
         <Author/> 
+        <!-- Add this divider to make clear distinctions between different Authors -->
+        <v-divider :thickness="20" class="border-opacity-0"></v-divider>
     </ClientOnly>
 </template>
 
