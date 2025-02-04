@@ -8,30 +8,32 @@
         <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
-             <!-- Import/ Export Buttons -->
-             <div>
-              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
-              <v-col >
-                Export:
-              </v-col>
-              <v-col>
-                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
-              </v-col>
-              </v-row>
-              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+            <!-- Import/ Export Buttons -->
+            <div>
+              <v-row :style="{ color: '#656cbe', fontSize: '18px' }">
                 <v-col>
-                Import:
-              </v-col>
-              <v-col>
-                <v-file-input label="Import" accept="application/json" @change="importStore" 
-                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
-                  </v-col>    
+                  Export:
+                </v-col>
+                <v-col>
+                  <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+                </v-col>
+              </v-row>
+              <v-row :style="{ color: '#656cbe', fontSize: '18px' }">
+                <v-col>
+                  Import:
+                </v-col>
+                <v-col>
+                  <v-file-input label="Import" accept="application/json" @change="importStore" hide-input
+                    prepend-icon="mdi-file-import-outline" class="vFileInputOpacity"></v-file-input>
+                </v-col>
               </v-row>
             </div>
             <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
-              <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
+              <v-row style="color: #656cbe;"
+                @click="useComponentSearchStore().searchQuery = cards[cardId].author; useComponentSearchStore().filter = 'Author'">
+                Author:{{ cards[cardId].author }}
               </v-row>
               <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
             </div>
@@ -40,15 +42,16 @@
 
         <v-col align="center" class="d-flex flex-column align-center justify-start">
 
-          <v-card-title :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }">
+          <v-card-title :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }"
+            @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'">
             {{ cards[cardId].title }}
           </v-card-title>
 
           <v-btn :variant="useStore.styled.variant" :elevation="useStore.styled.elevation"
             :rounded="useStore.styled.rounded"
             :color="useStore.styled.color.toLowerCase() === '' ? 'black' : useStore.styled.color.toLowerCase()"
-            :flat="useStore.styled.flat" :height="useStore.styled.height"
-            :width="useStore.styled.width" :style="{ backgroundColor: 'white !important' }" class="my-auto">
+            :flat="useStore.styled.flat" :height="useStore.styled.height" :width="useStore.styled.width"
+            :style="{ backgroundColor: 'white !important' }" class="my-auto">
             {{ useStore.styled.name }}
           </v-btn>
 
@@ -107,8 +110,7 @@
               <v-expansion-panel-text>
                 <v-row no-gutters>
                   <v-col>
-                    <v-select v-model="useStore.styled.variant" :items="useStore.variants" chips
-                      flat></v-select>
+                    <v-select v-model="useStore.styled.variant" :items="useStore.variants" chips flat></v-select>
                   </v-col>
                 </v-row>
 
@@ -145,9 +147,9 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-text-field v-model="useStore.styled.elevation" label="Elevation Amount"
-                              type="number" :min="0" :max="24" hint="Between 0 and 24 (default = 2)" persistent-hint
-                              outlined width="220"></v-text-field>
+                            <v-text-field v-model="useStore.styled.elevation" label="Elevation Amount" type="number"
+                              :min="0" :max="24" hint="Between 0 and 24 (default = 2)" persistent-hint outlined
+                              width="220"></v-text-field>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -299,9 +301,8 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-text-field :disabled="useStore.styled.AutoWidth"
-                              v-model="useStore.styled.width" label="Width" type="number" :min="0" persistent-hint
-                              outlined width="100"></v-text-field>
+                            <v-text-field :disabled="useStore.styled.AutoWidth" v-model="useStore.styled.width"
+                              label="Width" type="number" :min="0" persistent-hint outlined width="100"></v-text-field>
                           </v-col>
                           <v-col>
                             <v-btn :disabled="useStore.styled.AutoWidth" @click="useStore.ResetWidth">Reset
@@ -313,13 +314,11 @@
                       <v-container>
                         <v-row>
                           <v-col>
-                            <v-text-field :disabled="useStore.styled.AutoHeight"
-                              v-model="useStore.styled.height" label="Height" type="number" :min="0"
-                              persistent-hint outlined width="100"></v-text-field>
+                            <v-text-field :disabled="useStore.styled.AutoHeight" v-model="useStore.styled.height"
+                              label="Height" type="number" :min="0" persistent-hint outlined width="100"></v-text-field>
                           </v-col>
                           <v-col>
-                            <v-btn :disabled="useStore.styled.AutoHeight"
-                              @click="useStore.ResetHeight">Reset
+                            <v-btn :disabled="useStore.styled.AutoHeight" @click="useStore.ResetHeight">Reset
                               Height</v-btn>
                           </v-col>
                         </v-row>

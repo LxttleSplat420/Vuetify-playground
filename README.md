@@ -10,7 +10,9 @@
 
 # Current Features
 1) Different Buttons and Selects can be accessed and experimented with by navigating to respective webpage using the navigation drawer on the top left and selecting the individual tab.
-2) Different Types of the same component can be searched.
+2) Different Types of the same component can be searched with filters.
+3) Components can be exported/ imported for sharing or for backups.
+4) The search can be pre-filled by clicking on the Component Name (Title) or Author.
 
 # Things being worked on
 1) Adding More types of components
