@@ -6,6 +6,27 @@
       <v-row>
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+             <!-- Import/ Export Buttons -->
+             <div>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+              <v-col cols="auto">
+                Export:
+              </v-col>
+              <v-col>
+                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+              </v-col>
+              </v-row>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+                <v-col cols="auto">
+                Import:
+              </v-col>
+              <v-col cols="auto">
+                <v-file-input label="Import" accept="application/json" @change="importStore" 
+                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
+                  </v-col>    
+              </v-row>
+            </div>
+            <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
@@ -22,9 +43,9 @@
           </v-card-title>
 
 
-          <v-btn :active="useButtonStore.active" :disabled="useButtonStore.disabled"
-            :loading="useButtonStore.loading !== 'false' ? useButtonStore.loading : false"
-            :ripple="useButtonStore.ripple === 'false' ? false : { class: 'text-' + useButtonStore.ripple }"
+          <v-btn :active="useStore.active" :disabled="useStore.disabled"
+            :loading="useStore.loading !== 'false' ? useStore.loading : false"
+            :ripple="useStore.ripple === 'false' ? false : { class: 'text-' + useStore.ripple }"
             class="my-auto">
             {{ cards[cardId].title }} Button
           </v-btn>
@@ -33,7 +54,7 @@
         </v-col>
 
         <v-col cols="auto">
-          <v-expansion-panels v-model="useButtonStore.panelOpen" style="max-width: 400px;"
+          <v-expansion-panels v-model="useStore.panelOpen" style="max-width: 400px;"
             position-absolute="right-0">
 
             <!-- Active -->
@@ -50,7 +71,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.active }}
+                          {{ useStore.active }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -58,7 +79,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useButtonStore.active"></v-checkbox>
+                <v-checkbox v-model="useStore.active"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -76,7 +97,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.disabled }}
+                          {{ useStore.disabled }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -84,7 +105,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useButtonStore.disabled"></v-checkbox>
+                <v-checkbox v-model="useStore.disabled"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -102,7 +123,7 @@
                           Enable/ Disable and set a color
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.loading }}
+                          {{ useStore.loading }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -111,20 +132,20 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-col>
-                  <v-checkbox v-model="useButtonStore.isLoading"
-                    @change="useButtonStore.enableLoading()"></v-checkbox>
+                  <v-checkbox v-model="useStore.isLoading"
+                    @change="useStore.enableLoading()"></v-checkbox>
                 </v-col>
                 <v-col>
-                  <v-text-field v-model="useButtonStore.loading"
-                    :disabled="!useButtonStore.isLoading" placeholder="primary" hide-details clearable
-                    @click:clear="useButtonStore.clearLoadingColor"></v-text-field>
+                  <v-text-field v-model="useStore.loading"
+                    :disabled="!useStore.isLoading" placeholder="primary" hide-details clearable
+                    @click:clear="useStore.clearLoadingColor"></v-text-field>
                 </v-col>
 
               </v-expansion-panel-text>
             </v-expansion-panel>
 
             <!-- Ripple -->
-            <v-expansion-panel :disabled="useButtonStore.isLoading">
+            <v-expansion-panel :disabled="useStore.isLoading">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
@@ -137,7 +158,7 @@
                           Enable/ Disable and set a color
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.ripple }}
+                          {{ useStore.ripple }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -146,13 +167,13 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <v-col>
-                  <v-checkbox v-model="useButtonStore.isRipple"
-                    @change="useButtonStore.enableRipple()"></v-checkbox>
+                  <v-checkbox v-model="useStore.isRipple"
+                    @change="useStore.enableRipple()"></v-checkbox>
                 </v-col>
                 <v-col>
-                  <v-text-field v-model="useButtonStore.ripple" :disabled="!useButtonStore.isRipple"
+                  <v-text-field v-model="useStore.ripple" :disabled="!useStore.isRipple"
                     placeholder="true" hide-details clearable
-                    @click:clear="useButtonStore.clearRippleColor()"></v-text-field>
+                    @click:clear="useStore.clearRippleColor()"></v-text-field>
                 </v-col>
 
               </v-expansion-panel-text>
@@ -171,13 +192,23 @@
 import { useButtonActivityStore } from '~/stores/Buttons/Stefan/Activity'
 
 //Component Variables
-const useButtonStore = useButtonActivityStore();
+const useStore = useButtonActivityStore();
 const cardId = 1; //Search card ID
 
 //Search Button Logic
 import { useSearchButtons } from '~/components/Buttons/Stefan/StefanSearchButtons.ts'; //Add card search info here
 const { cards, matchesSearch } = useSearchButtons();
 
+//Import/ Export Logic [No need to change]
+import { useExportImport } from '~/composables/useExportImport';
+const { exportStore, importStore } = useExportImport(useStore);
+
 </script>
 
-<style></style>
+<style>
+/* Used to set v-file-input opacity to normal */
+.vFileInputOpacity .v-icon {
+  opacity: 1 !important;
+  font-size: 20;
+}
+</style>

@@ -5,6 +5,8 @@
 2) Change to the individual or shared tab to work on personal or collaborative projects. (Shared page is currently in progress)
 3) Each component can be edited/ experimented with using the panel on the right hand side of the respective component by clicking on the respective property/ properties you would like to edit on the panel and changing it. 
 4) Components can now be searched using the magnifying icon at the top.
+5) Components search filter can also now be changed by using the filter Icon at the top.
+6) Components can now have there states exported to a file, which can be shared as well as import the selected files to reload the component values.
 
 # Current Features
 1) Different Buttons and Selects can be accessed and experimented with by navigating to respective webpage using the navigation drawer on the top left and selecting the individual tab.

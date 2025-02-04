@@ -7,6 +7,27 @@
         <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+             <!-- Import/ Export Buttons -->
+             <div>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+              <v-col cols="auto">
+                Export:
+              </v-col>
+              <v-col>
+                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+              </v-col>
+              </v-row>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+                <v-col cols="auto">
+                Import:
+              </v-col>
+              <v-col cols="auto">
+                <v-file-input label="Import" accept="application/json" @change="importStore" 
+                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
+                  </v-col>    
+              </v-row>
+            </div>
+            <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
@@ -377,11 +398,23 @@ const cardId = 0; //Set the search card ID for title and author names etc. (Foun
 import { useSearchSwitches } from '~/components/Switches/Stefan/StefanSearchSwitches';
 const { cards, matchesSearch } = useSearchSwitches(); ////Remember to change useSearchBaseComponents() to the same name as the import in { } above
 
+//Import/ Export Logic [No need to change]
+import { useExportImport } from '~/composables/useExportImport';
+const { exportStore, importStore } = useExportImport(useStore);
+
 </script>
 
-
+<style>
+/* Used to set v-file-input opacity to normal */
+.vFileInputOpacity .v-icon {
+  opacity: 1 !important;
+  font-size: 20;
+}
+</style>
 
 <style lang="scss" scoped>
+
+
 :deep(.v-switch__thumb) {
   background-color: var(--v-switch-thumb-background) !important;
   /* Dynamically apply thumb color */

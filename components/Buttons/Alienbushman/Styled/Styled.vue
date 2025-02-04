@@ -8,6 +8,27 @@
           <!-- Author and Co-Author Labels -->
           <v-col cols="auto">
             <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+               <!-- Import/ Export Buttons -->
+             <div>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+              <v-col cols="auto">
+                Export:
+              </v-col>
+              <v-col>
+                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+              </v-col>
+              </v-row>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+                <v-col cols="auto">
+                Import:
+              </v-col>
+              <v-col cols="auto">
+                <v-file-input label="Import" accept="application/json" @change="importStore" 
+                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
+                  </v-col>    
+              </v-row>
+            </div>
+            <!-- ---------- -->
               <v-spacer></v-spacer>
               <div style="text-align: left;">
                 <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
@@ -24,12 +45,12 @@
               {{ cards[cardId].title }}
             </v-card-title>
   
-            <v-btn :variant="useButtonStore.styled.variant" :elevation="useButtonStore.styled.elevation"
-              :rounded="useButtonStore.styled.rounded"
-              :color="useButtonStore.styled.color.toLowerCase() === '' ? 'black' : useButtonStore.styled.color.toLowerCase()"
-              :flat="useButtonStore.styled.flat" :height="useButtonStore.styled.height"
-              :width="useButtonStore.styled.width" :style="{ backgroundColor: 'white !important' }" class="my-auto">
-              {{ useButtonStore.styled.name }}
+            <v-btn :variant="useStore.styled.variant" :elevation="useStore.styled.elevation"
+              :rounded="useStore.styled.rounded"
+              :color="useStore.styled.color.toLowerCase() === '' ? 'black' : useStore.styled.color.toLowerCase()"
+              :flat="useStore.styled.flat" :height="useStore.styled.height"
+              :width="useStore.styled.width" :style="{ backgroundColor: 'white !important' }" class="my-auto">
+              {{ useStore.styled.name }}
             </v-btn>
   
             <!-- <StyledButtonComponent/> -->
@@ -37,7 +58,7 @@
           </v-col>
   
           <v-col cols="auto">
-            <v-expansion-panels v-model="useButtonStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
+            <v-expansion-panels v-model="useStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
   
               <!-- Caption -->
               <v-expansion-panel>
@@ -53,7 +74,7 @@
                             Enter a button caption
                           </span>
                           <span v-else key="1">
-                            {{ useButtonStore.styled.name }}
+                            {{ useStore.styled.name }}
                           </span>
                         </v-fade-transition>
                       </v-col>
@@ -61,7 +82,7 @@
                   </template>
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                  <v-text-field v-model="useButtonStore.styled.name" hide-details clearable></v-text-field>
+                  <v-text-field v-model="useStore.styled.name" hide-details clearable></v-text-field>
                 </v-expansion-panel-text>
               </v-expansion-panel>
   
@@ -78,7 +99,7 @@
                           Select Variant Type
                         </span>
                         <span v-else key="1">
-                          {{ useButtonStore.styled.variant }}
+                          {{ useStore.styled.variant }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -87,7 +108,7 @@
                 <v-expansion-panel-text>
                   <v-row no-gutters>
                     <v-col>
-                      <v-select v-model="useButtonStore.styled.variant" :items="useButtonStore.variants" chips
+                      <v-select v-model="useStore.styled.variant" :items="useStore.variants" chips
                         flat></v-select>
                     </v-col>
                   </v-row>
@@ -96,7 +117,7 @@
               </v-expansion-panel>
   
               <!-- Elevation -->
-              <v-expansion-panel :disabled="useButtonStore.styled.flat">
+              <v-expansion-panel :disabled="useStore.styled.flat">
                 <v-expansion-panel-title>
                   <template v-slot:default="{ expanded }">
                     <v-row no-gutters>
@@ -109,7 +130,7 @@
                             Set elevated amount (default = 2)
                           </span>
                           <span v-else key="1">
-                            {{ useButtonStore.styled.elevation }}
+                            {{ useStore.styled.elevation }}
                           </span>
                         </v-fade-transition>
                       </v-col>
@@ -125,7 +146,7 @@
                         <v-container>
                           <v-row>
                             <v-col>
-                              <v-text-field v-model="useButtonStore.styled.elevation" label="Elevation Amount"
+                              <v-text-field v-model="useStore.styled.elevation" label="Elevation Amount"
                                 type="number" :min="0" :max="24" hint="Between 0 and 24 (default = 2)" persistent-hint
                                 outlined width="220"></v-text-field>
                             </v-col>
@@ -154,7 +175,7 @@
                             Set rounded amount (default = 0)
                           </span>
                           <span v-else key="1">
-                            {{ useButtonStore.styled.rounded }}
+                            {{ useStore.styled.rounded }}
                           </span>
                         </v-fade-transition>
                       </v-col>
@@ -170,7 +191,7 @@
                         <v-container>
                           <v-row>
                             <v-col>
-                              <v-select v-model="useButtonStore.styled.rounded" :items="useButtonStore.rounding" chips
+                              <v-select v-model="useStore.styled.rounded" :items="useStore.rounding" chips
                                 flat></v-select>
                             </v-col>
                           </v-row>
@@ -198,7 +219,7 @@
                             Enter a color
                           </span>
                           <span v-else key="1">
-                            {{ useButtonStore.styled.color === "" ? "black" : useButtonStore.styled.color }}
+                            {{ useStore.styled.color === "" ? "black" : useStore.styled.color }}
                           </span>
                         </v-fade-transition>
                       </v-col>
@@ -206,8 +227,8 @@
                   </template>
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                  <v-text-field v-model="useButtonStore.styled.color" placeholder="black" hide-details clearable
-                    @click:clear="useButtonStore.onClearStyled"></v-text-field>
+                  <v-text-field v-model="useStore.styled.color" placeholder="black" hide-details clearable
+                    @click:clear="useStore.onClearStyled"></v-text-field>
                 </v-expansion-panel-text>
               </v-expansion-panel>
   
@@ -225,7 +246,7 @@
                             Enable/ Disable
                           </span>
                           <span v-else key="1">
-                            {{ useButtonStore.styled.flat }}
+                            {{ useStore.styled.flat }}
                           </span>
                         </v-fade-transition>
                       </v-col>
@@ -233,7 +254,7 @@
                   </template>
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                  <v-checkbox v-model="useButtonStore.styled.flat" @change="useButtonStore.ChangeFlat"></v-checkbox>
+                  <v-checkbox v-model="useStore.styled.flat" @change="useStore.ChangeFlat"></v-checkbox>
                 </v-expansion-panel-text>
               </v-expansion-panel>
   
@@ -251,8 +272,8 @@
                             Default: Width=100 & Height=36
                           </span>
                           <span v-else key="1">
-                            Width: {{ useButtonStore.styled.width }}, Height: {{
-                              useButtonStore.styled.height }}
+                            Width: {{ useStore.styled.width }}, Height: {{
+                              useStore.styled.height }}
                           </span>
                         </v-fade-transition>
                       </v-col>
@@ -262,13 +283,13 @@
                 <v-expansion-panel-text>
                   <v-row>
                     <v-col>
-                      <v-checkbox label="Auto Width" v-model="useButtonStore.styled.AutoWidth"
-                        @change="useButtonStore.styledAutoWidth">
+                      <v-checkbox label="Auto Width" v-model="useStore.styled.AutoWidth"
+                        @change="useStore.styledAutoWidth">
                       </v-checkbox>
                     </v-col>
                     <v-col>
-                      <v-checkbox label="Auto Height" v-model="useButtonStore.styled.AutoHeight"
-                        @change="useButtonStore.styledAutoHeight">
+                      <v-checkbox label="Auto Height" v-model="useStore.styled.AutoHeight"
+                        @change="useStore.styledAutoHeight">
                       </v-checkbox>
                     </v-col>
                   </v-row>
@@ -279,12 +300,12 @@
                         <v-container>
                           <v-row>
                             <v-col>
-                              <v-text-field :disabled="useButtonStore.styled.AutoWidth"
-                                v-model="useButtonStore.styled.width" label="Width" type="number" :min="0" persistent-hint
+                              <v-text-field :disabled="useStore.styled.AutoWidth"
+                                v-model="useStore.styled.width" label="Width" type="number" :min="0" persistent-hint
                                 outlined width="100"></v-text-field>
                             </v-col>
                             <v-col>
-                              <v-btn :disabled="useButtonStore.styled.AutoWidth" @click="useButtonStore.ResetWidth">Reset
+                              <v-btn :disabled="useStore.styled.AutoWidth" @click="useStore.ResetWidth">Reset
                                 Width</v-btn>
                             </v-col>
                           </v-row>
@@ -293,13 +314,13 @@
                         <v-container>
                           <v-row>
                             <v-col>
-                              <v-text-field :disabled="useButtonStore.styled.AutoHeight"
-                                v-model="useButtonStore.styled.height" label="Height" type="number" :min="0"
+                              <v-text-field :disabled="useStore.styled.AutoHeight"
+                                v-model="useStore.styled.height" label="Height" type="number" :min="0"
                                 persistent-hint outlined width="100"></v-text-field>
                             </v-col>
                             <v-col>
-                              <v-btn :disabled="useButtonStore.styled.AutoHeight"
-                                @click="useButtonStore.ResetHeight">Reset
+                              <v-btn :disabled="useStore.styled.AutoHeight"
+                                @click="useStore.ResetHeight">Reset
                                 Height</v-btn>
                             </v-col>
                           </v-row>
@@ -325,15 +346,23 @@
   import { useMyStyledButtonStore } from '~/stores/Buttons/Alienbushman/StyledButton';
   
   //Component Variables
-  const useButtonStore = useMyStyledButtonStore();
+  const useStore = useMyStyledButtonStore();
   const cardId = 0; //Search card ID
   
   //Search Button Logic
   import { useSearchButtons } from '~/components/Buttons/Alienbushman/AlienSearchButtons.ts'; //Add card search info here
   const { cards, matchesSearch } = useSearchButtons();
   
-  </script>
-  
-  
-  
-  <style lang="scss" scoped></style>
+  //Import/ Export Logic [No need to change]
+import { useExportImport } from '~/composables/useExportImport';
+const { exportStore, importStore } = useExportImport(useStore);
+
+</script>
+
+<style>
+/* Used to set v-file-input opacity to normal */
+.vFileInputOpacity .v-icon {
+  opacity: 1 !important;
+  font-size: 20;
+}
+</style>

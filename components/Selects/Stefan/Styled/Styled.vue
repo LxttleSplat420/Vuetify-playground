@@ -6,6 +6,27 @@
         <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+             <!-- Import/ Export Buttons -->
+             <div>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+              <v-col>
+                Export:
+              </v-col>
+              <v-col>
+                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+              </v-col>
+              </v-row>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+                <v-col>
+                Import:
+              </v-col>
+              <v-col>
+                <v-file-input label="Import" accept="application/json" @change="importStore" 
+                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
+                  </v-col>    
+              </v-row>
+            </div>
+            <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
@@ -21,14 +42,14 @@
             {{ cards[cardId].title }}
           </v-card-title>
 
-          <v-select :label="useSelectsStore.label" :items="useSelectsStore.items" :variant="useSelectsStore.variant"
-            :clearable="useSelectsStore.clearable" :multiple="useSelectsStore.multiple" :chips="useSelectsStore.chips"
+          <v-select :label="useStore.label" :items="useStore.items" :variant="useStore.variant"
+            :clearable="useStore.clearable" :multiple="useStore.multiple" :chips="useStore.chips"
             width="500">
           </v-select>
         </v-col>
 
         <v-col cols="auto">
-          <v-expansion-panels v-model="useSelectsStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
+          <v-expansion-panels v-model="useStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
 
             <!-- Label -->
             <v-expansion-panel style="width: 400px;">
@@ -44,7 +65,7 @@
                           Enter a label
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.label }}
+                          {{ useStore.label }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -52,7 +73,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-text-field v-model="useSelectsStore.label" hide-details clearable></v-text-field>
+                <v-text-field v-model="useStore.label" hide-details clearable></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -70,7 +91,7 @@
                           Select a Variant
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.variant }}
+                          {{ useStore.variant }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -78,7 +99,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-select :items="useSelectsStore.variants" v-model="useSelectsStore.variant"
+                <v-select :items="useStore.variants" v-model="useStore.variant"
                   label="Variant type:"></v-select>
               </v-expansion-panel-text>
             </v-expansion-panel>
@@ -97,7 +118,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.clearable }}
+                          {{ useStore.clearable }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -105,7 +126,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useSelectsStore.clearable"></v-checkbox>
+                <v-checkbox v-model="useStore.clearable"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -123,7 +144,7 @@
                           Enable/ Disable (Multiple items can be selected)
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.multiple }}
+                          {{ useStore.multiple }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -131,7 +152,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useSelectsStore.multiple"></v-checkbox>
+                <v-checkbox v-model="useStore.multiple"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -149,7 +170,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.chips }}
+                          {{ useStore.chips }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -157,7 +178,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useSelectsStore.chips"></v-checkbox>
+                <v-checkbox v-model="useStore.chips"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -172,14 +193,23 @@
 import { useMySelectStyledStore } from '~/stores/Selects/Stefan/selectStyled';
 
 //Component Variables
-const useSelectsStore = useMySelectStyledStore();
+const useStore = useMySelectStyledStore();
 const cardId = 0; //Search card ID
 
 //Search Button Logic
 import { useSearchSelects } from '~/components/Selects/Stefan/StefanSearchSelects';
 const { cards, matchesSearch } = useSearchSelects();
 
+//Import/ Export Logic [No need to change]
+import { useExportImport } from '~/composables/useExportImport';
+const { exportStore, importStore } = useExportImport(useStore);
 
 </script>
 
-<style></style>
+<style>
+/* Used to set v-file-input opacity to normal */
+.vFileInputOpacity .v-icon {
+  opacity: 1 !important;
+  font-size: 20;
+}
+</style>

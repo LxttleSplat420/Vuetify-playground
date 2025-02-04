@@ -1,31 +1,19 @@
-<template>
-  <v-switch v-model="isOn" class="custom-switch">
-    <template v-slot:track>
-      <v-icon class="custom-icon">
-        {{ isOn ? 'mdi-check' : 'mdi-magnify' }}
-      </v-icon>
-    </template>
-  </v-switch>
-</template>
-
 <script setup>
-import { ref } from 'vue'
+import ButtonsPage from '~/components/Buttons/ButtonsPage.vue';
 
-const isOn = ref(false)
+definePageMeta({
+  layout: 'navigationbar',
+});
+
+
 </script>
 
-<style scoped>
-.custom-switch {
-  position: relative;
-}
+<template>
 
-.custom-icon {
-  position: absolute;
-  left: 10px;
-  color: white;
-  font-size: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all 0.3s ease; /* Smooth transition */
-}
-</style>
+<v-container >
+  <ButtonsPage />
+</v-container>
+      
+</template>
+
+<style lang="scss" scoped></style>

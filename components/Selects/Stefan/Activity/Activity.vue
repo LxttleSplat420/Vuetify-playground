@@ -5,6 +5,27 @@
         <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+             <!-- Import/ Export Buttons -->
+             <div>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+              <v-col>
+                Export:
+              </v-col>
+              <v-col>
+                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+              </v-col>
+              </v-row>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+                <v-col>
+                Import:
+              </v-col>
+              <v-col>
+                <v-file-input label="Import" accept="application/json" @change="importStore" 
+                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
+                  </v-col>    
+              </v-row>
+            </div>
+            <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
               <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
@@ -19,12 +40,12 @@
             {{ cards[cardId].title }}
           </v-card-title>
 
-          <v-select :readonly="useSelectsStore.readonly" :items="useSelectsStore.items"
-            :disabled="useSelectsStore.disabled" width="500"></v-select>
+          <v-select :readonly="useStore.readonly" :items="useStore.items"
+            :disabled="useStore.disabled" width="500"></v-select>
         </v-col>
 
         <v-col cols="auto">
-          <v-expansion-panels v-model="useSelectsStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
+          <v-expansion-panels v-model="useStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
 
             <!-- Readonly -->
             <v-expansion-panel width="400">
@@ -40,7 +61,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.readonly }}
+                          {{ useStore.readonly }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -48,7 +69,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useSelectsStore.readonly"></v-checkbox>
+                <v-checkbox v-model="useStore.readonly"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -66,7 +87,7 @@
                           Enable/ Disable
                         </span>
                         <span v-else key="1">
-                          {{ useSelectsStore.disabled }}
+                          {{ useStore.disabled }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -74,7 +95,7 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox v-model="useSelectsStore.disabled"></v-checkbox>
+                <v-checkbox v-model="useStore.disabled"></v-checkbox>
               </v-expansion-panel-text>
             </v-expansion-panel>
 
@@ -90,7 +111,7 @@
 import { useMySelectActivityStore } from '~/stores/Selects/Stefan/selectActivity';
 
 //Component Variables
-const useSelectsStore = useMySelectActivityStore();
+const useStore = useMySelectActivityStore();
 const cardId = 1; //Search card ID
 
 //Search Button Logic
@@ -98,6 +119,16 @@ import { useSearchSelects } from '~/components/Selects/Stefan/StefanSearchSelect
 const { cards, matchesSearch } = useSearchSelects();
 
 
+//Import/ Export Logic [No need to change]
+import { useExportImport } from '~/composables/useExportImport';
+const { exportStore, importStore } = useExportImport(useStore);
+
 </script>
 
-<style></style>
+<style>
+/* Used to set v-file-input opacity to normal */
+.vFileInputOpacity .v-icon {
+  opacity: 1 !important;
+  font-size: 20;
+}
+</style>
