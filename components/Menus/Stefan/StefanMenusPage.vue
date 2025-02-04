@@ -1,13 +1,13 @@
 <template>
     <ClientOnly>
         <!-- Add All Component Types here -->
-        <Type />
+        <Interactive />
     </ClientOnly>
 </template>
 
 <script setup>
 //Import All Component Types here
-import Type from '~/components/BaseComponent/AUTHOR/Type/Type.vue';
+import Interactive from '~/components/Menus/Stefan/Interactive/Interactive.vue';
 
 </script>
 

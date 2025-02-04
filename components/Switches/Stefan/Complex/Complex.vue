@@ -328,7 +328,7 @@
                   hint="Hover time required before tooltip opens" persistent-hint outlined
                   :disabled="useStore.tooltipAlwaysShow" clearable
                   @click:clear="useStore.tooltipOpenDelay = 0"></v-text-field>
-                <v-text-field v-model="useStore.tooltipCloseDelay" label="Open Delay (ms):" type="number" :min="0"
+                <v-text-field v-model="useStore.tooltipCloseDelay" label="Close Delay (ms):" type="number" :min="0"
                   hint="Time it takes for tooltip to disappear" persistent-hint outlined
                   :disabled="useStore.tooltipAlwaysShow" clearable
                   @click:clear="useStore.tooltipCloseDelay = 0"></v-text-field>

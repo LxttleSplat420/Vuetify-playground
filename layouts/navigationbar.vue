@@ -103,6 +103,7 @@ const components = [
   { title: 'Cards', link: '/Cards' },
   { title: 'Switches', link: '/Switches' },
   { title: 'Badges', link: '/Badges' },
+  { title: 'Menus', link: '/Menus' },
   { title: 'Test', link: '/Test' },
   //Add more component title and links for navigation
 ];

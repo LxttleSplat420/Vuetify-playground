@@ -3,11 +3,11 @@ import { useComponentSearchStore } from '~/stores/useComponentSearchStore'; //Gl
 // Search Query [No change needed]
 import { ref } from "vue";
 
-export function useSearchBaseComponents() { //Remember to Update useSearchBaseComponents name
+export function useStefanSearchMenus() { //Remember to Update useSearchBaseComponents name
 
 // Reactive data for cards and search query
 const cards = ref([
-  { id: 0, title: "Type_Ex_Styled" , author: "AUTHOR" , coAuthor: ["None"]},
+  { id: 0, title: "Interactive" , author: "Stefan" , coAuthor: ["Alienbushman"]},
   // Add more cards as needed below
 ]);
 
