@@ -268,21 +268,21 @@
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
 
-            <!-- Tooltip Info -->
+            <!-- Tooltip Content -->
             <v-expansion-panel width="400">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
                     <v-col class="d-flex justify-start" cols="4">
-                      Tooltip Info
+                      Tooltip Content
                     </v-col>
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Enter Tooltip Info
+                          Edit Tooltip v-card Content
                         </span>
                         <span v-else key="1">
-                          {{ useStore.tooltipTitle }}
+                          
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -310,10 +310,10 @@
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Edit Tooltip Display Delays
+                          Edit Tooltip Display Delays/ Location
                         </span>
                         <span v-else key="1">
-                          {{ useStore.tooltipTitle }}
+                         Delays/ Location
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -350,7 +350,7 @@
                           Edit Badge properties
                         </span>
                         <span v-else key="1">
-                          {{ useStore.inset }}
+                          {{ "X-Offset: " + useStore.badgeX + "; Y-Offset: " + useStore.badgeY }}
                         </span>
                       </v-fade-transition>
                     </v-col>

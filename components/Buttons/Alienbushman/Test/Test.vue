@@ -1,12 +1,12 @@
 <template>
 
-  <v-card elevation="5" v-if="matchesSearch(cards[cardId])" color="#e9eaf5">
+  <v-card elevation="5" v-if="matchesSearch(cards[cardId])" color="#e9eaf5" >
     <v-container fluid fill-height>
       <v-row justify="center">
 
         <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
-          <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+          <v-container class="d-flex flex-column" style="height: 100%; position: relative;" min-height="150">
              <!-- Import/ Export Buttons -->
              <div>
               <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
