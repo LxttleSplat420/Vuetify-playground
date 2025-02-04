@@ -153,10 +153,6 @@ watch(() => useComponentSearchStore().searchQuery, (newValue) => {
 //Keep page URL search paramater when page switching
 onMounted(() => {
 
-  //Set Filter default to Component Type if Filter is undefined
-  if (route.query.Filter === "undefined")
-  router.replace({ query: { ...route.query, Filter: useComponentSearchStore().filter } }); //Update URL Search Term
-
  
   //Store/ Load URL search parameters
   if (route.query.Search !== null || route.query.Search !== "") {
@@ -167,7 +163,6 @@ onMounted(() => {
     useComponentSearchStore().searchQuery = searchQuery === null ? "" : searchQuery as string;    
     useComponentSearchStore().filter = Filter === "" ? "Component Type" : Filter as string;   
   }
-
   
 })
 

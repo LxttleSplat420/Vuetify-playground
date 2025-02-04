@@ -44,25 +44,23 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const dialogVisible = ref(false)
 
 //Update page URL when search query is entered
 const route = useRoute();
 const router = useRouter();
 
+watch(() => dialogVisible.value, () => {  
+  router.replace({ query: { ...route.query, Search: "", Filter: "Component Type" } }); //Update URL Search Term
+  useComponentSearchStore().searchQuery = "";    
+  useComponentSearchStore().filter = "Component Type"; 
+},
+);
+
 onMounted(() => {
   // Automatically show dialog when page is mounted
   dialogVisible.value = true;
-  
-  nextTick(() => {
-    router.replace({ query: { ...route.query, Search: "", Filter: "Component Type" } }); //Update URL Search Term
-    
-    useComponentSearchStore().searchQuery = route.query.Search as string;    
-    useComponentSearchStore().filter = route.query.Filter as string;      
-
-  });
-
 })
 
 const theme = useTheme();
