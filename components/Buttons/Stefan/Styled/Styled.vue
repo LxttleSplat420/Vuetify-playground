@@ -32,7 +32,7 @@
             <v-spacer></v-spacer>
             <div style="text-align: left;">
               <v-row style="color: #656cbe;"
-                @click="useComponentSearchStore().searchQuery = cards[cardId].author; useComponentSearchStore().filter = 'Author'">
+                @click="useComponentSearchStore().searchQuery = cards[cardId].author; useComponentSearchStore().filter = 'Author'"class="cursor-pointer">
                 Author:{{ cards[cardId].author }}
               </v-row>
               <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
@@ -43,7 +43,8 @@
         <v-col align="center" class="d-flex flex-column align-center justify-start">
 
           <v-card-title :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }"
-            @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'">
+            @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'"
+            class="cursor-pointer">
             {{ cards[cardId].title }}
           </v-card-title>
 

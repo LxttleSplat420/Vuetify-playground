@@ -46,73 +46,57 @@
             @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'">
             {{ cards[cardId].title }}
           </v-card-title>
-
           <!-- Component -->
-          <div class="text-center">
-            <v-menu v-model="useStore.menu" :close-on-content-click="false" location="bottom" :persistent="useStore.menuPersistent">
-              <template v-slot:activator="{ props }">
-                <v-btn color="indigo" v-bind="props">
-                  Menu as Popover
-                </v-btn>
-              </template>
+          <v-row>
+            <v-col cols="12" sm="6">
+              <v-card height="200px" width="400px">
+                <v-card-title class="bg-blue d-flex align-center">
+                  <span class="text-h5">Menu</span>
 
-              <v-card min-width="300">
-                <v-list>
-                  <v-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg" subtitle="Founder of Vuetify"
-                    title="John Leider">
-                    <template v-slot:append>
-                      <v-btn :class="useStore.fav ? 'text-red' : ''" icon="mdi-heart" variant="text" @click="useStore.fav = !useStore.fav"></v-btn>
-                    </template>
-                  </v-list-item>
-                </v-list>
-
-                <v-divider></v-divider>
-
-                <v-list>
-                  <v-list-item>
-                    <v-switch v-model="useStore.message" color="purple" label="Enable messages" hide-details></v-switch>
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-switch v-model="useStore.hints" color="purple" label="Enable hints" hide-details></v-switch>
-                  </v-list-item>
-                </v-list>
-
-                <v-card-actions>
                   <v-spacer></v-spacer>
 
-                  <v-btn variant="text" @click="useStore.menu = false">
-                    Cancel
-                  </v-btn>
-                  <v-btn color="primary" variant="text" @click="useStore.menu = false">
-                    Save
-                  </v-btn>
-                </v-card-actions>
+                  <v-menu v-model="useStore.menuOpen">
+                    <template v-slot:activator="{ props }">
+                      <v-btn :icon="useStore.menuOpen ? useStore.iconOpen : useStore.iconClosed" variant="text"
+                        v-bind="props"></v-btn>
+                    </template>
+
+                    <v-list>
+                      <v-list-item v-for="(item, i) in useStore.items" :key="i"
+                        @click="useStore.item = item.title; useStore.itemIndex = i">
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </v-card-title>
+
+                <v-card-text>{{ "Item Name: " + useStore.item }}</v-card-text>
+                <v-card-text>{{ useStore.itemIndex === null ? "" : "Item Index: " + useStore.itemIndex }}</v-card-text>
               </v-card>
-            </v-menu>
-          </div>
-          <!-- --------------------------- -->
+            </v-col>
+          </v-row>
+          <!-- -------------------------------------------------------------------- -->
 
         </v-col>
 
         <v-col cols="auto">
           <v-expansion-panels v-model="useStore.panelOpen" style="max-width: 400px;" position-absolute="right-0">
 
-            <!-- Persistent -->
+            <!-- Panel -->
             <v-expansion-panel width="400">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
                     <v-col class="d-flex justify-start" cols="4">
-                      Persistent
+                      Icon
                     </v-col>
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Prevent menu closing when misclicked
+                          Enter mdi icons to use
                         </span>
                         <span v-else key="1">
-                          {{ useStore.menuPersistent }}
+                          {{ "Menu Closed: " + useStore.iconClosed + "; Menu Open: " + useStore.iconOpen }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -120,7 +104,8 @@
                 </template>
               </v-expansion-panel-title>
               <v-expansion-panel-text>
-                <v-checkbox label="Persistent" v-model="useStore.menuPersistent"></v-checkbox>
+                <v-text-field label="Menu Close:" v-model="useStore.iconClosed"></v-text-field>
+                <v-text-field label="Menu Open:" v-model="useStore.iconOpen"></v-text-field>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
@@ -134,11 +119,11 @@
 </template>
 
 <script setup>
-import { useMyStefanPopoverMenuStore } from '~/stores/Menus/Stefan/StefanPopoverMenu'; //Remember to change { useMyAuthorTypeStore } to the correct store name
+import { useMyStefanStyledMenuStore } from '~/stores/Menus/Stefan/StefanStyledMenu'; //Remember to change { useMyAuthorTypeStore } to the correct store name
 
 //Component Variables
-const useStore = useMyStefanPopoverMenuStore(); //Remember to change useMyAuthorTypeStore() to the same name as the import in { } above
-const cardId = 1; //Set the search card ID for title and author names etc. (Found in useSearchBaseComponents cards)
+const useStore = useMyStefanStyledMenuStore(); //Remember to change useMyAuthorTypeStore() to the same name as the import in { } above
+const cardId = 3; //Set the search card ID for title and author names etc. (Found in useSearchBaseComponents [Line 101 below] cards)
 
 //Search Button Logic
 import { useStefanSearchMenus } from '~/components/Menus/Stefan/StefanSearchMenus';
@@ -147,21 +132,6 @@ const { cards, matchesSearch } = useStefanSearchMenus(); ////Remember to change 
 //Import/ Export Logic [No need to change]
 import { useExportImport } from '~/composables/useExportImport';
 const { exportStore, importStore } = useExportImport(useStore);
-
-import {watch} from 'vue'
-
-
-// watch(() => useStore.panelOpen, (newValue) => {
-
-//   //Open Popover if panel 1 is opened
-//   if (newValue === 0){
-//     useStore.menu = true;
-//     useStore.menuPersistent = true;
-//   } else {
-//     useStore.menuPersistent = false;
-//   }
-  
-// });
 
 </script>
 

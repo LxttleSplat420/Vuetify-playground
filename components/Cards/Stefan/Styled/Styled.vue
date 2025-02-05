@@ -28,7 +28,7 @@
             <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
-              <v-row style="color: #656cbe;"
+              <v-row style="color: #656cbe;"class="cursor-pointer"
               @click="useComponentSearchStore().searchQuery = cards[cardId].author; useComponentSearchStore().filter = 'Author'"
               >Author: {{ cards[cardId].author }}
               </v-row>
@@ -38,7 +38,7 @@
         </v-col>
         <v-col align="center" class="d-flex flex-column align-center justify-start">
 
-          <v-card-title :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }"
+          <v-card-title class="cursor-pointer" :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }"
           @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'">
             {{ cards[cardId].title }}
           </v-card-title>

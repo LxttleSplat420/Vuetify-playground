@@ -9,6 +9,7 @@ export const useMyStefanPopoverMenuStore = defineStore({
     menu: false,
     message: false,
     hints: true,
+    menuPersistent: false,
   }),
   actions: {}
 })
