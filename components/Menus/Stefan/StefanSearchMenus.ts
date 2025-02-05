@@ -8,6 +8,8 @@ export function useStefanSearchMenus() { //Remember to Update useSearchBaseCompo
 // Reactive data for cards and search query
 const cards = ref([
   { id: 0, title: "Interactive" , author: "Stefan" , coAuthor: ["Alienbushman"]},
+  { id: 1, title: "Popover" , author: "Stefan" , coAuthor: ["Alienbushman"]},
+  { id: 2, title: "Vlist" , author: "Stefan" , coAuthor: ["Alienbushman"]},
   // Add more cards as needed below
 ]);
 

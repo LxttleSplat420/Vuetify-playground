@@ -65,7 +65,7 @@
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Expanded_dCaption
+                          Expanded_Caption
                         </span>
                         <span v-else key="1">
                           Collapsed_Caption

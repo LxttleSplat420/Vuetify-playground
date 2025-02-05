@@ -149,6 +149,7 @@ const router = useRouter();
 
 watch(() => useComponentSearchStore().searchQuery, (newValue) => {  
   router.replace({ query: { ...route.query, Search: newValue } }); //Update URL Search Term
+  isSearchVisible.value = true;
 },
 );
 

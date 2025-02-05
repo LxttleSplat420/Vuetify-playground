@@ -46,8 +46,9 @@
           @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'">
             {{ cards[cardId].title }}
           </v-card-title>
-
+          <!-- Component -->
           Component
+          <!-- -------------------------------------------------------------------- -->
 
         </v-col>
 
