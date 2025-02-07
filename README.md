@@ -8,6 +8,7 @@
 5) Components search filter can also now be changed by using the filter Icon at the top.
 6) Components can now have their states exported to a file, which can be shared as well as imported to reload the component values.
 7) URL links can be copy and pasted to quickly navigate to the desired webpage with the Search and Filter autofilled.
+8) Note if the webpage is refreshed or closed and reopened at any point all components will reset their properties. You can save the components properties before you refresh by exporting the component properties and importing the components properties after the refresh again.
 
 # Current Features
 1) Different Buttons and Selects can be accessed and experimented with by navigating to respective webpage using the navigation drawer on the top left and selecting the individual tab.
