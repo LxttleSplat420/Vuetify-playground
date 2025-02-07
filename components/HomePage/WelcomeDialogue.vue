@@ -15,7 +15,6 @@
               the top. (Ex. Styled)</h3>
             <h3> <v-icon class="mx-2">mdi-filter</v-icon> Specify what to search for using the filter at the top. (Ex.
               Author)</h3>
-              <h3> <v-icon class="mx-2">mdi-dots-vertical</v-icon> Currently no function</h3>
             <h3 class="d-flex align-center">
               <v-switch :readonly="false" class="mr-2" v-model="isLightTheme" color="primary" true-icon="mdi-weather-sunny"
                 false-icon="mdi-weather-night" inset />
@@ -23,9 +22,9 @@
             </h3>
 
           </v-container>
-          <div>
+          <!-- <div>
             *Note: (Test page is only for development purposes)
-          </div>
+          </div> -->
         </v-card>
 
         <v-card-actions>
@@ -75,7 +74,7 @@ const isLightTheme = ref(theme.global.name.value === 'light');
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at top left, rgba(0, 0, 0, 0) 80px, rgba(0, 0, 0, 0.8) 120px);
+  background: radial-gradient( rgba(0, 0, 0, 0) 80px, rgba(0, 0, 0, 0.8) 120px);
   pointer-events: none;
   /* Ensures interactions below aren't blocked */
   z-index: 10000;

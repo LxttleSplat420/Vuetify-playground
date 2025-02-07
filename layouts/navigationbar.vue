@@ -41,7 +41,7 @@
           
         </template>
 
-        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+       
 
         <!-- Dark/ Light Mode Switch -->
         <v-switch class="pt-5 pr-3 " v-model="isLightTheme" color='primary' true-icon='mdi-weather-sunny'
