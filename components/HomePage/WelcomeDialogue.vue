@@ -15,17 +15,16 @@
               the top. (Ex. Styled)</h3>
             <h3> <v-icon class="mx-2">mdi-filter</v-icon> Specify what to search for using the filter at the top. (Ex.
               Author)</h3>
-              <h3> <v-icon class="mx-2">mdi-dots-vertical</v-icon> Currently no function</h3>
             <h3 class="d-flex align-center">
-              <v-switch readonly="" class="mr-2" v-model="isLightTheme" color="primary" true-icon="mdi-weather-sunny"
+              <v-switch :readonly="false" class="mr-2" v-model="isLightTheme" color="primary" true-icon="mdi-weather-sunny"
                 false-icon="mdi-weather-night" inset />
               Can be toggled to switch between dark and light mode. (Ex. Dark mode [the preferred theme])
             </h3>
 
           </v-container>
-          <div>
+          <!-- <div>
             *Note: (Test page is only for development purposes)
-          </div>
+          </div> -->
         </v-card>
 
         <v-card-actions>
@@ -42,14 +41,25 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const dialogVisible = ref(false)
+
+//Update page URL when search query is entered
+const route = useRoute();
+const router = useRouter();
+
+watch(() => dialogVisible.value, () => {  
+  router.replace({ query: { ...route.query, Search: "", Filter: "Component Type" } }); //Update URL Search Term
+  useComponentSearchStore().searchQuery = "";    
+  useComponentSearchStore().filter = "Component Type"; 
+},
+);
 
 onMounted(() => {
   // Automatically show dialog when page is mounted
-  dialogVisible.value = true
+  dialogVisible.value = true;
 })
 
 const theme = useTheme();
@@ -64,7 +74,7 @@ const isLightTheme = ref(theme.global.name.value === 'light');
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at top left, rgba(0, 0, 0, 0) 80px, rgba(0, 0, 0, 0.8) 120px);
+  background: radial-gradient( rgba(0, 0, 0, 0) 80px, rgba(0, 0, 0, 0.8) 120px);
   pointer-events: none;
   /* Ensures interactions below aren't blocked */
   z-index: 10000;

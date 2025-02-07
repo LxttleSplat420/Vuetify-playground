@@ -1,5 +1,5 @@
 <script setup>
-import BaseComponentPage from '~/components/BaseComponent/BaseComponentPage.vue';
+import Badges from '~/components/Badges/BadgesPage.vue';
 
 definePageMeta({
   layout: 'navigationbar',
@@ -11,7 +11,7 @@ definePageMeta({
 <template>
 
 <v-container >
-  <BaseComponentPage />
+  <Badges />
 </v-container>
       
 </template>

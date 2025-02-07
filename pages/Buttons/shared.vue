@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h1>Coming Soon!!!</h1>
+        <StefanStyledButton />
     </div>
 </template>
 
 <script setup>
-
+import StefanStyledButton from '~/components/Buttons/Stefan/Styled/Styled.vue'
 
 definePageMeta({
     layout: 'navigationbar',

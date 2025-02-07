@@ -7,9 +7,9 @@ export function useSearchButtons() {
 
 // Reactive data for cards and search query
 const cards = ref([
-  { id: 0, title: "Styled" , author: "Stefan" , coAuthor: ['None']},
-  { id: 1, title: "Activity", author: "Stefan", coAuthor: ['No', 'ones']  },
-  { id: 2, title: "Interactive", author: "Stefan", coAuthor: ['NA']  },
+  { id: 0, title: "Styled" , author: "Stefan" , coAuthor: ['Rynardt']},
+  { id: 1, title: "Activity", author: "Stefan", coAuthor: ['Jake', 'Tiaan', 'Ilanri']  },
+  { id: 2, title: "Interactive", author: "Stefan", coAuthor: ['Rynardt', 'Ilanri']  },
   // Add more cards as needed
 ]);
 

@@ -33,7 +33,7 @@ export const useMyStefanComplexSwitchStore = defineStore({ //Change useMyAuthorT
     badgeContent: "+9",
     badgeDot: true,
     badgeY: 10, 
-    badgeX: 0,
+    badgeX: 50,
 
     tooltipPositions: ['bottom', 'top', 'left', 'right'],
 

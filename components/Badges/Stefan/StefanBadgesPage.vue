@@ -1,13 +1,13 @@
 <template>
     <ClientOnly>
         <!-- Add All Component Types here -->
-        <Type />
+        <Basic />
     </ClientOnly>
 </template>
 
 <script setup>
 //Import All Component Types here
-import Type from '~/components/Switches/Stefan/Type/Type.vue';
+import Basic from '~/components/Badges/Stefan/Basic/Basic.vue';
 
 </script>
 

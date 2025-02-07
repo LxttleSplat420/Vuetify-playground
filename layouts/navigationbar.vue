@@ -41,7 +41,7 @@
           
         </template>
 
-        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+       
 
         <!-- Dark/ Light Mode Switch -->
         <v-switch class="pt-5 pr-3 " v-model="isLightTheme" color='primary' true-icon='mdi-weather-sunny'
@@ -52,7 +52,8 @@
         <v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'bottom' : undefined" temporary
           color="#ebebf3">
           <v-list>
-            <v-list-item v-for="component in components" :key="component.title" :to="`${component.link}/individual`"
+            <v-list-item v-for="component in components" :key="component.title" :to="{path: `${component.link}/individual`,
+            query: route.query}"
               :class="{ 'v-list-item--active': selectedItem === component.link }" @click="selectItem(component)">
               <v-list-item-content>
                 <v-list-item-title>{{ component.title }}</v-list-item-title>
@@ -65,8 +66,10 @@
       <v-main>
         <v-card>
           <v-tabs v-if="$route.path !== '/'" v-model="tab" bg-color="indigo" align-tabs="title">
-            <v-tab :to="`${selectedItem}/individual`">Individual</v-tab>
-            <v-tab :to="`${selectedItem}/shared`">Shared</v-tab>
+            <v-tab :to="{path: `${selectedItem}/individual`,
+            query: route.query}">Individual</v-tab>
+            <v-tab :to="{path: `${selectedItem}/shared`,
+            query: route.query}">Shared</v-tab>
           </v-tabs>
 
           <v-card-text>
@@ -86,20 +89,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
 import { useComponentSearchStore } from '~/stores/useComponentSearchStore';
 
 const drawer = ref(null);
-const selectedItem = ref("/buttons");
+const selectedItem = ref("/Buttons");
 const tab = ref("individual");
 
 const components = [
-  { title: 'Buttons', link: '/buttons' },
-  { title: 'Selects', link: '/selects' },
-  { title: 'Cards', link: '/cards' },
-  { title: 'Switches', link: '/switches' },
-  { title: 'Test', link: '/test' },
+  { title: 'Buttons', link: '/Buttons' },
+  { title: 'Selects', link: '/Selects' },
+  { title: 'Cards', link: '/Cards' },
+  { title: 'Switches', link: '/Switches' },
+  { title: 'Badges', link: '/Badges' },
+  { title: 'Menus', link: '/Menus' },
+  { title: 'Test', link: '/Test' },  
   //Add more component title and links for navigation
 ];
 
@@ -121,11 +126,12 @@ const toggleSearch = () => {
     }
   });
 };
-
+//Clear search Field
 const searchClear = () => {
   useComponentSearchStore().searchQuery = '';
 };
 
+//Change light and dark modes
 const theme = useTheme();
 
 const isLightTheme = ref(theme.global.name.value === 'light');
@@ -137,16 +143,46 @@ watch(isLightTheme, (newValue: boolean) => {
   theme.global.name.value = themeName;
 });
 
+//Update page URL when search query is entered
+const route = useRoute();
+const router = useRouter();
+
+watch(() => useComponentSearchStore().searchQuery, (newValue) => {  
+  router.replace({ query: { ...route.query, Search: newValue } }); //Update URL Search Term
+  isSearchVisible.value = true;
+},
+);
+
+//Keep page URL search paramater when page switching
+onMounted(() => {
+
+ 
+  //Store/ Load URL search parameters
+  if (route.query.Search !== null || route.query.Search !== "") {
+    const searchQuery = Array.isArray(route.query.Search) ? route.query.Search[0] : route.query.Search;
+    const Filter = Array.isArray(route.query.Filter) ? route.query.Filter[0] : route.query.Filter;
+    console.log(Filter);
+
+    useComponentSearchStore().searchQuery = searchQuery === null ? "" : searchQuery as string;    
+    useComponentSearchStore().filter = Filter === "" ? "Component Type" : Filter as string;   
+  }
+  
+})
+
+
 //Search Filter
 const onClick = (filterType : any) => {
   isSearchVisible.value = true;
   useComponentSearchStore().filter = filterType;  
+  router.replace({ query: { ...route.query, Filter: filterType } }); //Update URL Search Term with filter
 
   nextTick(() => {
     if (searchField.value !== null) {
       searchField.value.focus(); // Focus the search input when visible
     }
   });
+
+
 };
 
 </script>

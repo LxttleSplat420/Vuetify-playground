@@ -7,9 +7,32 @@
         <!-- Author and Co-Author Labels -->
         <v-col cols="auto">
           <v-container class="d-flex flex-column" style="height: 100%; position: relative;">
+             <!-- Import/ Export Buttons -->
+             <div>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+              <v-col cols="auto">
+                Export:
+              </v-col>
+              <v-col>
+                <v-icon size='24' @click="exportStore()">mdi-file-export-outline</v-icon>
+              </v-col>
+              </v-row>
+              <v-row :style="{color: '#656cbe',  fontSize: '18px'}">
+                <v-col cols="auto">
+                Import:
+              </v-col>
+              <v-col cols="auto">
+                <v-file-input label="Import" accept="application/json" @change="importStore" 
+                   hide-input prepend-icon="mdi-file-import-outline" class="vFileInputOpacity" ></v-file-input>  
+                  </v-col>    
+              </v-row>
+            </div>
+            <!-- ---------- -->
             <v-spacer></v-spacer>
             <div style="text-align: left;">
-              <v-row style="color: #656cbe;">Author: {{ cards[cardId].author }}
+              <v-row style="color: #656cbe;"class="cursor-pointer"
+              @click="useComponentSearchStore().searchQuery = cards[cardId].author; useComponentSearchStore().filter = 'Author'"
+              >Author: {{ cards[cardId].author }}
               </v-row>
               <v-row style="color: #656cbe;">Co-Author/s: {{ cards[cardId].coAuthor.join(", ") }}</v-row>
             </div>
@@ -19,7 +42,9 @@
 
         <v-col align="center" class="d-flex flex-column align-center justify-start">
 
-          <v-card-title :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }">
+          <v-card-title class="cursor-pointer" :style="{ fontSize: '34px', color: '#656cbe', fontWeight: 'bold' }"
+          @click="useComponentSearchStore().searchQuery = cards[cardId].title; useComponentSearchStore().filter = 'Component Type'"
+          >
             {{ cards[cardId].title }}
           </v-card-title>
 
@@ -32,7 +57,7 @@
 
               <!-- Badge -->
               <v-badge :color="useStore.badgeColor" :model-value="useStore.badgeShow" :dot="useStore.badgeDot"
-                location="top center" :offset-y="useStore.badgeY">
+                :offset-x="useStore.badgeX" :offset-y="useStore.badgeY">
                 <!-- Badge Slot Content -->
                 <template v-slot:badge>{{ useStore.badgeContent }} </template>
                 <!-- ----------- -->
@@ -243,21 +268,21 @@
             </v-expansion-panel>
             <!-- ----------------------------------------------------------------------------- -->
 
-            <!-- Tooltip Info -->
+            <!-- Tooltip Content -->
             <v-expansion-panel width="400">
               <v-expansion-panel-title>
                 <template v-slot:default="{ expanded }">
                   <v-row no-gutters>
                     <v-col class="d-flex justify-start" cols="4">
-                      Tooltip Info
+                      Tooltip Content
                     </v-col>
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Enter Tooltip Info
+                          Edit Tooltip v-card Content
                         </span>
                         <span v-else key="1">
-                          {{ useStore.tooltipTitle }}
+                          
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -285,10 +310,10 @@
                     <v-col class="text-grey" cols="8">
                       <v-fade-transition leave-absolute>
                         <span v-if="expanded" key="0">
-                          Edit Tooltip Display Delays
+                          Edit Tooltip Display Delays/ Location
                         </span>
                         <span v-else key="1">
-                          {{ useStore.tooltipTitle }}
+                         Delays/ Location
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -303,7 +328,7 @@
                   hint="Hover time required before tooltip opens" persistent-hint outlined
                   :disabled="useStore.tooltipAlwaysShow" clearable
                   @click:clear="useStore.tooltipOpenDelay = 0"></v-text-field>
-                <v-text-field v-model="useStore.tooltipCloseDelay" label="Open Delay (ms):" type="number" :min="0"
+                <v-text-field v-model="useStore.tooltipCloseDelay" label="Close Delay (ms):" type="number" :min="0"
                   hint="Time it takes for tooltip to disappear" persistent-hint outlined
                   :disabled="useStore.tooltipAlwaysShow" clearable
                   @click:clear="useStore.tooltipCloseDelay = 0"></v-text-field>
@@ -325,7 +350,7 @@
                           Edit Badge properties
                         </span>
                         <span v-else key="1">
-                          {{ useStore.inset }}
+                          {{ "X-Offset: " + useStore.badgeX + "; Y-Offset: " + useStore.badgeY }}
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -345,6 +370,9 @@
                 <v-text-field v-model="useStore.badgeY" label="Badge Y-offset" type="number" :min="0"
                   hint="Y-Offset = 10 recommended" persistent-hint outlined clearable
                   @click:clear="useStore.badgeY = 0"></v-text-field>
+                  <v-text-field v-model="useStore.badgeX" label="Badge X-offset" type="number" :min="0"
+                  hint="X-Offset = 50 Approx." persistent-hint outlined clearable
+                  @click:clear="useStore.badgeX = 0"></v-text-field>
 
                 <v-text-field label="Badge Color:" v-model="useStore.badgeColor" clearable
                   hint="Must be lowercase or Hexadecimal (#69F0AE)" placeholder="undefined" persistent-placeholder
@@ -374,11 +402,23 @@ const cardId = 0; //Set the search card ID for title and author names etc. (Foun
 import { useSearchSwitches } from '~/components/Switches/Stefan/StefanSearchSwitches';
 const { cards, matchesSearch } = useSearchSwitches(); ////Remember to change useSearchBaseComponents() to the same name as the import in { } above
 
+//Import/ Export Logic [No need to change]
+import { useExportImport } from '~/composables/useExportImport';
+const { exportStore, importStore } = useExportImport(useStore);
+
 </script>
 
-
+<style>
+/* Used to set v-file-input opacity to normal */
+.vFileInputOpacity .v-icon {
+  opacity: 1 !important;
+  font-size: 20;
+}
+</style>
 
 <style lang="scss" scoped>
+
+
 :deep(.v-switch__thumb) {
   background-color: var(--v-switch-thumb-background) !important;
   /* Dynamically apply thumb color */

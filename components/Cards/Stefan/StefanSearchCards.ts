@@ -9,7 +9,7 @@ export function useSearchCards() {
 const cards = ref([
   { id: 0, title: "Styled" , author: "Stefan" , coAuthor: ["None"] },
   { id: 1, title: "Interactive" , author: "Stefan" , coAuthor: ["None"] },
-  { id: 2, title: "Slots" , author: "Stefan" , coAuthor: ["None"] },
+  { id: 2, title: "Slots" , author: "Stefan" , coAuthor: ["Ilanri"] },
   // Add more cards as needed
 ]);
 
